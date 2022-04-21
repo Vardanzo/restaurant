@@ -40,18 +40,18 @@ task('pug', function() {
         .pipe(dest('./public/'));
 });
 
-task( 'fonts', function (){
-   return src('./src/fonts/*')
-       .pipe(dest('./public/fonts/'))
+task( 'assets', function (){
+   return src('./src/assets/**/*')
+       .pipe(dest('./public/assets/'))
 });
 
-const build = series('clean', parallel('scripts', 'scss', 'pug', 'fonts'))
+const build = series('clean', parallel('scripts', 'scss', 'pug', 'assets'))
 
 task('dev', function() {
     browserSync.init({
         server: "./public"
     });
-    watch("src/**/*.pug", build).on("change", browserSync.reload)
+    watch(["src/styles/*.scss", "src/scripts/*.js", "src/**/*.pug"], build).on("change", browserSync.reload)
 });
 
 exports.build= build;

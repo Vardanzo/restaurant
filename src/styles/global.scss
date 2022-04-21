@@ -1,71 +1,74 @@
+@import "_/_variables";
+@import "_/_mixins";
+
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-black.eot');
-  src: url('../fonts/gilroy-black.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-black.woff2') format('woff2'),
-  url('../fonts/gilroy-black.woff') format('woff'),
-  url('../fonts/gilroy-black.ttf') format('truetype'),
-  url('../fonts/gilroy-black.svg#gilroy-black') format('svg');
+  src: url('../assets/fonts/gilroy-black.eot');
+  src: url('../assets/fonts/gilroy-black.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-black.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-black.woff') format('woff'),
+  url('../assets/fonts/gilroy-black.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-black.svg#gilroy-black') format('svg');
   font-style: normal;
   font-weight: 800;
 }
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-bold.eot');
-  src: url('../fonts/gilroy-bold.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-bold.woff2') format('woff2'),
-  url('../fonts/gilroy-bold.woff') format('woff'),
-  url('../fonts/gilroy-bold.ttf') format('truetype'),
-  url('../fonts/gilroy-bold.svg#gilroy-bold') format('svg');
+  src: url('../assets/fonts/gilroy-bold.eot');
+  src: url('../assets/fonts/gilroy-bold.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-bold.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-bold.woff') format('woff'),
+  url('../assets/fonts/gilroy-bold.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-bold.svg#gilroy-bold') format('svg');
   font-style: normal;
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-heavy.eot');
-  src: url('../fonts/gilroy-heavy.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-heavy.woff2') format('woff2'),
-  url('../fonts/gilroy-heavy.woff') format('woff'),
-  url('../fonts/gilroy-heavy.ttf') format('truetype'),
-  url('../fonts/gilroy-heavy.svg#gilroy-heavy') format('svg');
+  src: url('../assets/fonts/gilroy-heavy.eot');
+  src: url('../assets/fonts/gilroy-heavy.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-heavy.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-heavy.woff') format('woff'),
+  url('../assets/fonts/gilroy-heavy.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-heavy.svg#gilroy-heavy') format('svg');
   font-style: normal;
   font-weight: 900;
 }
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-medium.eot');
-  src: url('../fonts/gilroy-medium.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-medium.woff2') format('woff2'),
-  url('../fonts/gilroy-medium.woff') format('woff'),
-  url('../fonts/gilroy-medium.ttf') format('truetype'),
-  url('../fonts/gilroy-medium.svg#gilroy-medium') format('svg');
+  src: url('../assets/fonts/gilroy-medium.eot');
+  src: url('../assets/fonts/gilroy-medium.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-medium.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-medium.woff') format('woff'),
+  url('../assets/fonts/gilroy-medium.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-medium.svg#gilroy-medium') format('svg');
   font-style: normal;
   font-weight: 500;
 }
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-regular.eot');
-  src: url('../fonts/gilroy-regular.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-regular.woff2') format('woff2'),
-  url('../fonts/gilroy-regular.woff') format('woff'),
-  url('../fonts/gilroy-regular.ttf') format('truetype'),
-  url('../fonts/gilroy-regular.svg#gilroy-regular') format('svg');
+  src: url('../assets/fonts/gilroy-regular.eot');
+  src: url('../assets/fonts/gilroy-regular.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-regular.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-regular.woff') format('woff'),
+  url('../assets/fonts/gilroy-regular.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-regular.svg#gilroy-regular') format('svg');
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-semibold.eot');
-  src: url('../fonts/gilroy-semibold.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-semibold.woff2') format('woff2'),
-  url('../fonts/gilroy-semibold.woff') format('woff'),
-  url('../fonts/gilroy-semibold.ttf') format('truetype'),
-  url('../fonts/gilroy-semibold.svg#gilroy-semibold') format('svg');
+  src: url('../assets/fonts/gilroy-semibold.eot');
+  src: url('../assets/fonts/gilroy-semibold.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-semibold.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-semibold.woff') format('woff'),
+  url('../assets/fonts/gilroy-semibold.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-semibold.svg#gilroy-semibold') format('svg');
   font-style: normal;
   font-weight: 600;
 }
@@ -73,21 +76,169 @@
 
 @font-face {
   font-family: "Gilroy";
-  src: url('../fonts/gilroy-thin.eot');
-  src: url('../fonts/gilroy-thin.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/gilroy-thin.woff2') format('woff2'),
-  url('../fonts/gilroy-thin.woff') format('woff'),
-  url('../fonts/gilroy-thin.ttf') format('truetype'),
-  url('../fonts/gilroy-thin.svg#gilroy-thin') format('svg');
+  src: url('../assets/fonts/gilroy-thin.eot');
+  src: url('../assets/fonts/gilroy-thin.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-thin.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-thin.woff') format('woff'),
+  url('../assets/fonts/gilroy-thin.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-thin.svg#gilroy-thin') format('svg');
   font-style: normal;
   font-weight: 100;
 }
 
-
-*{
+* {
   margin: 0;
   padding: 0;
 }
-body{
+
+body {
+  background: $gradient-page-background no-repeat;
+}
+
+body, button, input, textarea {
   font-family: "Gilroy", sans-serif;
+}
+
+.wrapper {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.header__top-section {
+  display: flex;
+  align-items: center;
+  padding: 23px 70px 24px 98px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 25px;
+  letter-spacing: 0.15em;
+  color:$color-white;
+  text-decoration: none;
+}
+
+.header__logo {
+  margin-right: 72px;
+}
+
+.header__search {
+  margin-right: 17px;
+}
+
+.search {
+  position: relative;
+}
+
+.headers-icon {
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  top: 14px;
+}
+
+.search__location-icon {
+  background-image: url("../assets/icons/location.svg");
+  left: 14px;
+}
+
+.search__input {
+  box-sizing: border-box;
+  width: 555px;
+  max-width: 555px;
+  background: $color-search-input-bg;
+  border-radius: 10px;
+  padding: 15px 48px 16px;
+  border: none;
+  line-height: 21px;
+  color: $color-white;
+  font-size: 18px;
+
+  &::placeholder {
+    font-size: 18px;
+    line-height: 21px;
+    color: $color-simple-text;
+  }
+}
+
+.search__scope-icon {
+  background-image: url("../assets/icons/search.svg");
+  right: 17px;
+}
+
+.contacts-small {
+  display: flex;
+  align-items: center;
+  margin-right: 188px;
+}
+
+.contacts-small__phone-icon-bg {
+  @include flex-center;
+  min-width: 32px;
+  max-height: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background:$gradient-brand-accent;
+  margin-right: 10px;
+}
+
+.contacts-small__phone-icon {
+  background-image: url("../assets/icons/calling.svg");
+  width: 16px;
+  height: 16px;
+}
+
+.contacts-small__title{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: $color-simple-text;
+}
+
+.contacts-small__phone-number{
+  color: $color-white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.header__bucket{
+  height: 52px;
+  padding-left: 24px;
+  min-width: 149px;
+}
+
+.button{
+  display: flex;
+  border-radius: 10px;
+  background: $gradient-brand-accent;
+  color: $color-white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  align-items: center;
+}
+
+.item-counter{
+ @include flex-center;
+  height: 38px;
+  width: 49px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  margin-left: 20px;
+}
+
+.item-counter__amount{
+ @include flex-center;
+  background: $color-white;
+  border-radius: 50%;
+  height: 24px;
+    width: 24px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: $color-dark-text;
 }

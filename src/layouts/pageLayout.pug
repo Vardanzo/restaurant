@@ -2,16 +2,35 @@ block vars
 
 doctype html
 html(lang="ru")
-head
+  head
     meta(charset="UTF-8")
     meta(name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     link(rel="stylesheet" href="styles/global.css")
     block head
     title #{title}
-body
-    header.header
-    main
+  body
+    div.wrapper
+      header.header
+        div.header__top-section
+          a.logo.header__logo(href="/") LOGOS
+          form
+            div.search.header__search
+              div.headers-icon.search__location-icon
+              input.search__input(type="text" name="search" placeholder="Введите адрес доставки")
+              div.headers-icon.search__scope-icon
+          div.contacts-small
+            div.contacts-small__phone-icon-bg
+              div.contacts-small__phone-icon
+            div.contacts-small__info
+              div.contacts-small__title Контакты:
+              div.contacts-small__phone-number +7 (917) 510-57-59
+          button.button.header__bucket
+            span Корзина
+            div.item-counter
+              div.item-counter__amount(id="amountItemsInBucket") 0
+
+      main
         block content
-    footer.footer
+      footer.footer
