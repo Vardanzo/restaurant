@@ -40,7 +40,12 @@ task('pug', function() {
         .pipe(dest('./public/'));
 });
 
-const build = series('clean', parallel('scripts', 'scss', 'pug'))
+task( 'fonts', function (){
+   return src('./src/fonts/*')
+       .pipe(dest('./public/fonts/'))
+});
+
+const build = series('clean', parallel('scripts', 'scss', 'pug', 'fonts'))
 
 task('dev', function() {
     browserSync.init({
