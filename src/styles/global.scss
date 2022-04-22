@@ -279,6 +279,7 @@ body, button, input, textarea {
 }
 
 .restaurant-menu__item {
+  box-sizing: border-box;
   height: 77px;
   list-style: none;
 }
