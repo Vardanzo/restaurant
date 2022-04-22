@@ -115,7 +115,7 @@ body, button, input, textarea {
   font-size: 25px;
   line-height: 25px;
   letter-spacing: 0.15em;
-  color:$color-white;
+  color: $color-white;
   text-decoration: none;
 }
 
@@ -181,7 +181,7 @@ body, button, input, textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background:$gradient-brand-accent;
+  background: $gradient-brand-accent;
   margin-right: 10px;
 }
 
@@ -191,27 +191,27 @@ body, button, input, textarea {
   height: 16px;
 }
 
-.contacts-small__title{
+.contacts-small__title {
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;
   color: $color-simple-text;
 }
 
-.contacts-small__phone-number{
+.contacts-small__phone-number {
   color: $color-white;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
 }
 
-.header__bucket{
+.header__bucket {
   height: 52px;
   padding-left: 24px;
   min-width: 149px;
 }
 
-.button{
+.button {
   display: flex;
   border-radius: 10px;
   background: $gradient-brand-accent;
@@ -223,22 +223,89 @@ body, button, input, textarea {
   align-items: center;
 }
 
-.item-counter{
- @include flex-center;
+.item-counter {
+  @include flex-center;
   height: 38px;
   width: 49px;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   margin-left: 20px;
 }
 
-.item-counter__amount{
- @include flex-center;
+.item-counter__amount {
+  @include flex-center;
   background: $color-white;
   border-radius: 50%;
   height: 24px;
-    width: 24px;
+  width: 24px;
   font-weight: 600;
   font-size: 12px;
   line-height: 14px;
   color: $color-dark-text;
+}
+
+.header__banner-section {
+  position: relative;
+}
+
+.header__banner-shadow {
+  box-shadow: inset 0 0 10px 10px #44403F;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header__banner-img {
+  width: 100%;
+  min-height: 296px;
+  box-shadow: 0 0 10px 10px #44403F;
+}
+
+.header__bottom-section {
+  padding: 0 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header__bottom-section_fixed{
+  position: fixed;
+  top: 0;
+  background: #403C3B;
+}
+
+.restaurant-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-menu__item {
+  height: 77px;
+  list-style: none;
+}
+
+.restaurant-menu__link {
+  @include flex-center;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: $color-simple-text;
+  height: 77px;
+}
+
+.restaurant-menu__link:hover{
+  color: $color-white;
+}
+
+.restaurant-menu__item_active {
+    border-bottom: 3px solid #618967;
+    .restaurant-menu__link {
+      color: $color-white;
+    }
+}
+
+
+.menu-list__item{
+  height: 575px;
+  border: 1px solid #FFF;
 }

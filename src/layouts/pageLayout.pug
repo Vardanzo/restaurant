@@ -1,5 +1,7 @@
 block vars
 
+- var restaurantMenuItems=[{name:"Холодные закуски",link:"#coldSnacks"},{name:"Горячие закуски",link:"#hotSnacks"},{name:"Мясные блюда",link:"#meatFood"},{name:"Супы",link:"#soups"},{name:"Рыбные блюда",link:"#fishFood"},{name:"Гриль меню",link:"#grilMenu"},{name:"Фирменые блюда",link:"#brandedFood"},{name:"Напитки",link:"#drinks"}]
+
 doctype html
 html(lang="ru")
   head
@@ -8,6 +10,7 @@ html(lang="ru")
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     link(rel="stylesheet" href="styles/global.css")
+    script(src="scripts/common.js" defer)
     block head
     title #{title}
   body
@@ -30,7 +33,15 @@ html(lang="ru")
             span Корзина
             div.item-counter
               div.item-counter__amount(id="amountItemsInBucket") 0
-
+        if bannerSrc
+          div.header__banner-section
+            div.header__banner-shadow
+            img.header__banner-img(src=bannerSrc)
+        nav.header__bottom-section
+          ul.restaurant-menu
+              each menuItem in restaurantMenuItems
+                li.restaurant-menu__item
+                  a.restaurant-menu__link(href=menuItem.link) #{menuItem.name}
       main
         block content
       footer.footer
