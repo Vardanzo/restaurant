@@ -267,7 +267,7 @@ body, button, input, textarea {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.header__bottom-section_fixed{
+.header__bottom-section_fixed {
   position: fixed;
   top: 0;
   background: #403C3B;
@@ -294,19 +294,92 @@ body, button, input, textarea {
   height: 77px;
 }
 
-.restaurant-menu__link:hover{
+.restaurant-menu__link:hover {
   color: $color-white;
 }
 
 .restaurant-menu__item_active {
-    border-bottom: 3px solid #618967;
-    .restaurant-menu__link {
-      color: $color-white;
-    }
+  border-bottom: 3px solid #618967;
+
+  .restaurant-menu__link {
+    color: $color-white;
+  }
 }
 
-
-.menu-list__item{
+.menu-list__item {
   height: 575px;
   border: 1px solid #FFF;
+}
+
+.footer {
+  background: $gradient-footer-background;
+  display: flex;
+  padding: 26px 336px 30px 159px;
+}
+
+.footer__logo {
+  margin-bottom: 15px;
+}
+
+.footer__left-section {
+  display: flex;
+  flex-direction: column;
+  margin-right: 86px;
+}
+
+.documentation-block__item {
+  padding-bottom: 6px;
+}
+
+.company-teg {
+  padding-bottom: 7px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: $color-simple-text;
+}
+
+.documentation-block__link {
+  display: block;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: $color-white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detailed-information-block {
+  @include flex-center;
+  flex-grow: 1;
+}
+
+.detailed-information-block__list {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.documentation-block {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.list_style {
+  list-style: none;
+}
+
+.detailed-information-block__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: $color-white;
+}
+
+.detailed-information-block__link:hover,
+.documentation-block__link:hover {
+  border-bottom: 1px solid $color-identical-green;
 }
