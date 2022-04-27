@@ -1,16 +1,22 @@
 extends ../layouts/pageLayout
 
+
+
 block vars
     - var title = "Главная страница"
     - var bannerSrc = "assets/img/banners/header_banner.png"
 
+block head
+    link(rel="stylesheet" href="styles/products.css")
+
 block content
-  div.menu-list(id="menuList")
-    div.menu-list__item(id="coldSnacks")
-    div.menu-list__item(id="hotSnacks")
-    div.menu-list__item(id="meatFood")
-    div.menu-list__item(id="soups")
-    div.menu-list__item(id="fishFood")
-    div.menu-list__item(id="grillMenu")
-    div.menu-list__item(id="brandedFood")
-    div.menu-list__item(id="drinks")
+    div.menu-list(id="menuList")
+        div.menu-list__item(id="coldSnacks")
+            include ../blocks/coldSnacksSection
+        div.menu-list__item(id="hotSnacks")
+        div.menu-list__item(id="meatFood")
+        div.menu-list__item(id="soups")
+        div.menu-list__item(id="fishFood")
+        div.menu-list__item(id="grillMenu")
+        div.menu-list__item(id="brandedFood")
+        div.menu-list__item(id="drinks")

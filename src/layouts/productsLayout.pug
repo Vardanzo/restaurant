@@ -1,0 +1,26 @@
+block vars
+
+
+div.product-card-section
+  div.product-card-section__title-block
+    div.vertical-green-bar
+    h3.product-card-section__title #{title}
+  div.product-card-section__list
+      each product in products
+        div.product-card
+          div
+            img.product-card__img(src=product.img)
+          div.product-card-wrapper
+            div.product-card__title-block
+              div
+                div.product-card__title #{product.name}
+                div.product-card__weight Вес: #{product.weight} г
+              div.product-card__description #{product.description}
+            div.product-card__price-block
+              div.price #{product.price} ₽
+              button.button.add-to-basket В корзину
+                img(src="assets/icons/basket.svg")
+
+
+
+
