@@ -311,7 +311,13 @@ body, button, input, textarea {
 
 .menu-list__item {
   height: 575px;
-  border: 1px solid #FFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-list{
+  :last-child{
+    border-bottom: none;
+  }
 }
 
 .footer {

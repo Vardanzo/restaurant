@@ -14,13 +14,13 @@ function menuScroll() {
             lastScrolledAreaId = areaElements[i].getAttribute("id");
         }
     }
+
     document.getElementsByClassName("restaurant-menu__item_active")[0].classList.remove("restaurant-menu__item_active");
     Array.from(menuListElements).find(function (li) {
         if (li.children[0].getAttribute("href") === "#" + lastScrolledAreaId) {
             li.classList.add("restaurant-menu__item_active");
         }
     })
-
 }
 
 
