@@ -95,6 +95,10 @@ body {
   background: $gradient-page-background no-repeat;
 }
 
+li {
+  list-style: none;
+}
+
 body, button, input, textarea {
   font-family: "Gilroy", sans-serif;
 }
@@ -281,7 +285,6 @@ body, button, input, textarea {
 .restaurant-menu__item {
   box-sizing: border-box;
   height: 77px;
-  list-style: none;
 }
 
 .restaurant-menu__link {
@@ -350,12 +353,12 @@ body, button, input, textarea {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.detailed-information-block {
+.footer__right-section {
   @include flex-center;
   flex-grow: 1;
 }
 
-.detailed-information-block__list {
+.detailed-information-block {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
@@ -365,10 +368,6 @@ body, button, input, textarea {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-}
-
-.list_style {
-  list-style: none;
 }
 
 .detailed-information-block__link {

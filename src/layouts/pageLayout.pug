@@ -1,8 +1,8 @@
 block vars
 
 - var restaurantMenuItems=[{name:"Холодные закуски",link:"#coldSnacks"},{name:"Горячие закуски",link:"#hotSnacks"},{name:"Мясные блюда",link:"#meatFood"},{name:"Супы",link:"#soups"},{name:"Рыбные блюда",link:"#fishFood"},{name:"Гриль меню",link:"#grillMenu"},{name:"Фирменые блюда",link:"#brandedFood"},{name:"Напитки",link:"#drinks"}]
-- var restaurantDocumentationItems=[{name:"Пользовательское соглашение",link:"#termsOfUse"},{name:"Карта сайта",link:"#sitesMap"},{name:"Политика конфиденциальности",link:"#privacyPolicy"}]
-- var restaurantDetailedInformation=[{name:"О ресторане",link:"#aboutResrtaurant"},{name:"Условия доставки",link:"#termsOfDelivery"},{name:"Возврат товара",link:"#perchaseReturn"},{name:"Акции",link:"#promotions"}]
+- var restaurantDocumentationItems=[{name:"Пользовательское соглашение",link:"#"},{name:"Карта сайта",link:"#"},{name:"Политика конфиденциальности",link:"#"}]
+- var restaurantDetailedInformation=[{name:"О ресторане",link:"/about"},{name:"Условия доставки",link:"/delivery"},{name:"Возврат товара",link:"/purchaseReturn"},{name:"Акции",link:"/promotions"}]
 
 doctype html
 html(lang="ru")
@@ -46,7 +46,6 @@ html(lang="ru")
                   a.restaurant-menu__link(href=menuItem.link) #{menuItem.name}
       main
         block content
-
       footer.footer
         div.footer__left-section
           a.logo.footer__logo(href="/") LOGOS
@@ -56,11 +55,10 @@ html(lang="ru")
             span Все права защищены. 2010-2020
           ul.documentation-block
               each documentationItem in restaurantDocumentationItems
-                li.list_style.documentation-block__item
+                li.documentation-block__item
                   a.documentation-block__link(href=documentationItem.link) #{documentationItem.name}
-        div.detailed-information-block
-          ul.detailed-information-block__list
+        div.footer__right-section
+          ul.detailed-information-block
               each detailedInformation in restaurantDetailedInformation
-                li.list_style.detailed-information-block__item
+                li.detailed-information-block__item
                   a.detailed-information-block__link(href=detailedInformation.link) #{detailedInformation.name}
-
