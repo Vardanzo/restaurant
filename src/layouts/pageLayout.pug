@@ -1,0 +1,64 @@
+block vars
+
+- var restaurantMenuItems=[{name:"Холодные закуски",link:"#coldSnacks"},{name:"Горячие закуски",link:"#hotSnacks"},{name:"Мясные блюда",link:"#meatFood"},{name:"Супы",link:"#soups"},{name:"Рыбные блюда",link:"#fishFood"},{name:"Гриль меню",link:"#grillMenu"},{name:"Фирменые блюда",link:"#brandedFood"},{name:"Напитки",link:"#drinks"}]
+- var restaurantDocumentationItems=[{name:"Пользовательское соглашение",link:"#"},{name:"Карта сайта",link:"#"},{name:"Политика конфиденциальности",link:"#"}]
+- var restaurantDetailedInformation=[{name:"О ресторане",link:"/about"},{name:"Условия доставки",link:"/delivery"},{name:"Возврат товара",link:"/purchaseReturn"},{name:"Акции",link:"/promotions"}]
+
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    link(rel="stylesheet" href="styles/global.css")
+    script(src="scripts/common.js" defer)
+    block head
+    title #{title}
+  body
+    div.wrapper
+      header.header
+        div.header__top-section
+          a.logo.header__logo(href="/") LOGOS
+          form
+            div.search.header__search
+              div.headers-icon.search__location-icon
+              input.search__input(type="text" name="search" placeholder="Введите адрес доставки")
+              div.headers-icon.search__scope-icon
+          div.contacts-small
+            div.contacts-small__phone-icon-bg
+              div.contacts-small__phone-icon
+            div.contacts-small__info
+              div.contacts-small__title Контакты:
+              div.contacts-small__phone-number +7 (917) 510-57-59
+          button.button.header__bucket
+            span Корзина
+            div.item-counter
+              div.item-counter__amount(id="amountItemsInBucket") 0
+        if bannerSrc
+          div.header__banner-section
+            div.header__banner-shadow
+            img.header__banner-img(src=bannerSrc)
+        nav.header__bottom-section
+          ul.restaurant-menu
+              each menuItem in restaurantMenuItems
+                li.restaurant-menu__item
+                  a.restaurant-menu__link(href=menuItem.link) #{menuItem.name}
+      main
+        block content
+      footer.footer
+        div.footer__left-section
+          a.logo.footer__logo(href="/") LOGOS
+          div.company-teg
+            span © ООО СК «АПШЕРОН»
+            br
+            span Все права защищены. 2010-2020
+          ul.documentation-block
+              each documentationItem in restaurantDocumentationItems
+                li.documentation-block__item
+                  a.documentation-block__link(href=documentationItem.link) #{documentationItem.name}
+        div.footer__right-section
+          ul.detailed-information-block
+              each detailedInformation in restaurantDetailedInformation
+                li.detailed-information-block__item
+                  a.detailed-information-block__link(href=detailedInformation.link) #{detailedInformation.name}

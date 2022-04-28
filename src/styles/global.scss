@@ -1,0 +1,384 @@
+@import "_/_variables";
+@import "_/_mixins";
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-black.eot');
+  src: url('../assets/fonts/gilroy-black.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-black.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-black.woff') format('woff'),
+  url('../assets/fonts/gilroy-black.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-black.svg#gilroy-black') format('svg');
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-bold.eot');
+  src: url('../assets/fonts/gilroy-bold.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-bold.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-bold.woff') format('woff'),
+  url('../assets/fonts/gilroy-bold.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-bold.svg#gilroy-bold') format('svg');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-heavy.eot');
+  src: url('../assets/fonts/gilroy-heavy.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-heavy.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-heavy.woff') format('woff'),
+  url('../assets/fonts/gilroy-heavy.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-heavy.svg#gilroy-heavy') format('svg');
+  font-style: normal;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-medium.eot');
+  src: url('../assets/fonts/gilroy-medium.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-medium.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-medium.woff') format('woff'),
+  url('../assets/fonts/gilroy-medium.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-medium.svg#gilroy-medium') format('svg');
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-regular.eot');
+  src: url('../assets/fonts/gilroy-regular.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-regular.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-regular.woff') format('woff'),
+  url('../assets/fonts/gilroy-regular.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-regular.svg#gilroy-regular') format('svg');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-semibold.eot');
+  src: url('../assets/fonts/gilroy-semibold.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-semibold.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-semibold.woff') format('woff'),
+  url('../assets/fonts/gilroy-semibold.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-semibold.svg#gilroy-semibold') format('svg');
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+@font-face {
+  font-family: "Gilroy";
+  src: url('../assets/fonts/gilroy-thin.eot');
+  src: url('../assets/fonts/gilroy-thin.eot?#iefix') format('embedded-opentype'),
+  url('../assets/fonts/gilroy-thin.woff2') format('woff2'),
+  url('../assets/fonts/gilroy-thin.woff') format('woff'),
+  url('../assets/fonts/gilroy-thin.ttf') format('truetype'),
+  url('../assets/fonts/gilroy-thin.svg#gilroy-thin') format('svg');
+  font-style: normal;
+  font-weight: 100;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $gradient-page-background no-repeat;
+}
+
+li {
+  list-style: none;
+}
+
+body, button, input, textarea {
+  font-family: "Gilroy", sans-serif;
+}
+
+.wrapper {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.header__top-section {
+  display: flex;
+  align-items: center;
+  padding: 23px 70px 24px 98px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 25px;
+  letter-spacing: 0.15em;
+  color: $color-white;
+  text-decoration: none;
+}
+
+.header__logo {
+  margin-right: 72px;
+}
+
+.header__search {
+  margin-right: 17px;
+}
+
+.search {
+  position: relative;
+}
+
+.headers-icon {
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  top: 14px;
+}
+
+.search__location-icon {
+  background-image: url("../assets/icons/location.svg");
+  left: 14px;
+}
+
+.search__input {
+  box-sizing: border-box;
+  width: 555px;
+  max-width: 555px;
+  background: $color-search-input-bg;
+  border-radius: 10px;
+  padding: 15px 48px 16px;
+  border: none;
+  line-height: 21px;
+  color: $color-white;
+  font-size: 18px;
+
+  &::placeholder {
+    font-size: 18px;
+    line-height: 21px;
+    color: $color-simple-text;
+  }
+}
+
+.search__scope-icon {
+  background-image: url("../assets/icons/search.svg");
+  right: 17px;
+}
+
+.contacts-small {
+  display: flex;
+  align-items: center;
+  margin-right: 188px;
+}
+
+.contacts-small__phone-icon-bg {
+  @include flex-center;
+  min-width: 32px;
+  max-height: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $gradient-brand-accent;
+  margin-right: 10px;
+}
+
+.contacts-small__phone-icon {
+  background-image: url("../assets/icons/calling.svg");
+  width: 16px;
+  height: 16px;
+}
+
+.contacts-small__title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: $color-simple-text;
+}
+
+.contacts-small__phone-number {
+  color: $color-white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.header__bucket {
+  height: 52px;
+  padding-left: 24px;
+  min-width: 149px;
+}
+
+.button {
+  display: flex;
+  border-radius: 10px;
+  background: $gradient-brand-accent;
+  color: $color-white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  align-items: center;
+}
+
+.item-counter {
+  @include flex-center;
+  height: 38px;
+  width: 49px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  margin-left: 20px;
+}
+
+.item-counter__amount {
+  @include flex-center;
+  background: $color-white;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: $color-dark-text;
+}
+
+.header__banner-section {
+  position: relative;
+}
+
+.header__banner-shadow {
+  box-shadow: inset 0 0 10px 10px #44403F;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header__banner-img {
+  width: 100%;
+  min-height: 296px;
+  box-shadow: 0 0 10px 10px #44403F;
+}
+
+.header__bottom-section {
+  padding: 0 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header__bottom-section_fixed {
+  position: fixed;
+  top: 0;
+  background: #403C3B;
+}
+
+.restaurant-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-menu__item {
+  box-sizing: border-box;
+  height: 77px;
+}
+
+.restaurant-menu__link {
+  @include flex-center;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: $color-simple-text;
+  height: 77px;
+}
+
+.restaurant-menu__link:hover {
+  color: $color-white;
+}
+
+.restaurant-menu__item_active {
+  border-bottom: 3px solid #618967;
+
+  .restaurant-menu__link {
+    color: $color-white;
+  }
+}
+
+.menu-list__item {
+  height: 575px;
+  border: 1px solid #FFF;
+}
+
+.footer {
+  background: $gradient-footer-background;
+  display: flex;
+  padding: 26px 336px 30px 159px;
+}
+
+.footer__logo {
+  margin-bottom: 15px;
+}
+
+.footer__left-section {
+  display: flex;
+  flex-direction: column;
+  margin-right: 86px;
+}
+
+.documentation-block__item {
+  padding-bottom: 6px;
+}
+
+.company-teg {
+  padding-bottom: 7px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: $color-simple-text;
+}
+
+.documentation-block__link {
+  display: block;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: $color-white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer__right-section {
+  @include flex-center;
+  flex-grow: 1;
+}
+
+.detailed-information-block {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.documentation-block {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.detailed-information-block__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: $color-white;
+}
+
+.detailed-information-block__link:hover,
+.documentation-block__link:hover {
+  border-bottom: 1px solid $color-identical-green;
+}
