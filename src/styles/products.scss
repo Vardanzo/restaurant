@@ -34,6 +34,10 @@
   border-radius: 10px;
   background: $gradient-product-card-background;
   margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .product-card__info {
@@ -96,7 +100,36 @@
   width: 137px;
   padding: 10px 16px 10px 19px;
 
-  &:first-child {
+  img {
     margin-left: 12px;
+  }
+}
+
+.glider-contain__button_prev {
+  transform: rotate(180deg);
+  left: -74px;
+}
+
+.glider-contain__button_next {
+  right: -74px;
+}
+
+.glider-contain__button {
+  position: absolute;
+  top: calc(288px - 27px);
+  border: none;
+  width: 54px;
+  height: 54px;
+  background-color: transparent;
+
+  path {
+    fill: $color-white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    path {
+      fill: $color-identical-green;
+    }
   }
 }
