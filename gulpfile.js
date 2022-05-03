@@ -40,12 +40,17 @@ task('pug', function() {
         .pipe(dest('./public/'));
 });
 
-task( 'assets', function (){
+task('vendors', function (){
+    return src('./src/vendors/**/*')
+        .pipe(dest('./public/vendors'))
+})
+
+task('assets', function (){
    return src('./src/assets/**/*')
        .pipe(dest('./public/assets/'))
 });
 
-const build = series('clean', parallel('scripts', 'scss', 'pug', 'assets'))
+const build = series('clean', parallel('scripts', 'scss', 'pug', 'assets', 'vendors'))
 
 task('dev', function() {
     browserSync.init({
@@ -53,6 +58,7 @@ task('dev', function() {
     });
     watch(["src/styles/*.scss", "src/scripts/*.js", "src/**/*.pug"], build).on("change", browserSync.reload)
 });
+
 
 exports.build= build;
 exports.dev=series(build, "dev");
