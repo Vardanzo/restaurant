@@ -275,6 +275,7 @@ body, button, input, textarea {
   position: fixed;
   top: 0;
   background: #403C3B;
+  z-index: 999;
 }
 
 .restaurant-menu {
@@ -310,12 +311,18 @@ body, button, input, textarea {
 }
 
 .menu-list__item {
-  height: 575px;
+  padding-bottom: 50px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    .glider-contain__button {
+      opacity: 1;
+    }
+  }
 }
 
-.menu-list{
-  :last-child{
+.menu-list {
+  :last-child {
     border-bottom: none;
   }
 }
@@ -387,4 +394,25 @@ body, button, input, textarea {
 .detailed-information-block__link:hover,
 .documentation-block__link:hover {
   border-bottom: 1px solid $color-identical-green;
+}
+
+.scroll-back-button {
+  border: none;
+  position: fixed;
+  left: 40px;
+  bottom: 80px;
+  @include flex-center;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background: $color-white;
+
+  &:hover {
+    cursor: pointer;
+    background: $color-identical-green;
+
+    path {
+      fill: $color-white;
+    }
+  }
 }

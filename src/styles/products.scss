@@ -106,30 +106,28 @@
 }
 
 .glider-contain__button_prev {
-  transform: rotate(180deg);
-  left: -74px;
+   left: 80px;
 }
 
 .glider-contain__button_next {
-  right: -74px;
+  right: 80px;
+  transform: rotate(180deg);
 }
 
 .glider-contain__button {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
   position: absolute;
-  top: calc(288px - 27px);
+  bottom: -36px;
   border: none;
   width: 54px;
-  height: 54px;
-  background-color: transparent;
-
-  path {
-    fill: $color-white;
-  }
+  height: 22px;
+  background: $color-slider-button;
+  border-radius: 5px;
+  padding: 3px 19px;
 
   &:hover {
     cursor: pointer;
-    path {
-      fill: $color-identical-green;
-    }
+    background:$color-identical-green;
   }
 }
