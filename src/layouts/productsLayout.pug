@@ -1,8 +1,8 @@
 block vars
 
-div.glider-contain.product-card-section
+div.swiper.product-card-section
   h3.product-card-section__title #{title}
-  div.glider.product-card-section__list
+  div.swiper-wrapper.product-card-section__list
       each product in products
         div.product-card
           img.product-card__img(src=product.img)

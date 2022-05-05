@@ -4,7 +4,7 @@ const ARROW = `
 <path d="M7 13L4 8.04167L7 3" stroke="white" stroke-width="2" stroke-linecap="round"/>
 </svg>
 `
-let list = document.querySelectorAll('.glider');
+let list = document.querySelectorAll('.swiper');
 for (const slider of list) {
     let gliderPrev = document.createElement("button");
     gliderPrev.classList.add("glider-contain__button_prev", "glider-contain__button")
@@ -15,17 +15,16 @@ for (const slider of list) {
     gliderNext.setAttribute("area-label", "Next")
     gliderNext.innerHTML = ARROW;
 
-    slider.parentNode.append(gliderPrev, gliderNext)
+    slider.append(gliderPrev, gliderNext)
 
-    new Glider(slider, {
-        slidesToShow: 5,
-        exactWidth: true,
-        itemWidth: 345,
-        draggable: true,
-        arrows: {
-            prev: gliderPrev,
-            next: gliderNext
+    const swiper = new Swiper(slider, {
+        cssMode: true,
+
+        navigation: {
+            prevEl: gliderPrev,
+            nextEl: gliderNext
         }
     })
+    swiper.navigation.init()
 }
 
