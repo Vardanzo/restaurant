@@ -2,7 +2,6 @@
 @import "_/_mixins";
 
 .product-card-section__list {
-  overflow: hidden;
   display: flex;
 }
 
@@ -35,6 +34,10 @@
   border-radius: 10px;
   background: $gradient-product-card-background;
   margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .product-card__info {
@@ -97,7 +100,34 @@
   width: 137px;
   padding: 10px 16px 10px 19px;
 
-  &:first-child {
+  img {
     margin-left: 12px;
+  }
+}
+
+.glider-contain__button_prev {
+   left: 80px;
+}
+
+.glider-contain__button_next {
+  right: 80px;
+  transform: rotate(180deg);
+}
+
+.glider-contain__button {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+  position: absolute;
+  bottom: -36px;
+  border: none;
+  width: 54px;
+  height: 22px;
+  background: $color-slider-button;
+  border-radius: 5px;
+  padding: 3px 19px;
+
+  &:hover {
+    cursor: pointer;
+    background:$color-identical-green;
   }
 }
