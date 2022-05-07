@@ -20,6 +20,9 @@
                 li.classList.add("restaurant-menu__item_active");
             }
         })
+        if (areaElements[areaElements.length - 1].getBoundingClientRect().bottom <=78){
+            document.querySelector(".restaurant-menu__item_active")?.classList.remove("restaurant-menu__item_active");
+        }
     }
 
     function createScrollBackButton() {

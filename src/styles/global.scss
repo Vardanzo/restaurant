@@ -416,3 +416,110 @@ body, button, input, textarea {
     }
   }
 }
+
+.add {
+  display: flex;
+  justify-content: space-between;
+  background-image: url("../assets/img/our-caffe.png");
+  margin: 0 37px 70px 40px;
+  padding: 71px 99px 71px 70px;
+  align-items: center;
+}
+
+.info-section__title {
+  color: $color-white;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+
+.info-section__text-wrapper{
+  position: relative;
+  height: 225px;
+  margin-bottom: 60px;
+}
+
+.info-section__text {
+  position: absolute;
+  transition: opacity 300ms;
+  top: 0;
+  left: 0;
+  width: 563px;
+  opacity: 0;
+  color: $color-simple-text;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.info-section__text_active{
+  opacity: 1;
+}
+
+.info-section__button {
+  width: 223px;
+  height: 59px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  text-transform: uppercase;
+  color: $color-white;
+
+  &:hover {
+    cursor: pointer;
+    background: $color-identical-green;
+  }
+}
+
+.advantages-section__item {
+  position: relative;
+  @include flex-center;
+  flex-direction: column;
+  width: 228px;
+  height: 228px;
+  background: rgba(80, 75, 74, 0.9);
+  backdrop-filter: blur(10px);
+  border: none;
+  margin-right: 15px;
+  color: $color-white;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    path {
+      fill: $color-identical-green;
+    }
+    color: $color-identical-green;
+  }
+
+  svg {
+    display: block;
+    margin-bottom: 30px;
+
+  }
+}
+
+.advantages-section__layout{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.advantages-section {
+  display: flex;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
