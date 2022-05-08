@@ -209,7 +209,7 @@ body, button, input, textarea {
   line-height: 20px;
 }
 
-.header__bucket {
+.header__basket {
   height: 52px;
   padding-left: 24px;
   min-width: 149px;
@@ -225,6 +225,13 @@ body, button, input, textarea {
   line-height: 17px;
   border: none;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button_hidden{
+  display: none !important;
 }
 
 .item-counter {

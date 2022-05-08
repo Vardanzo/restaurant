@@ -3,6 +3,7 @@
 
 .product-card-section__list {
   display: flex;
+  padding-top: 10px;
 }
 
 .product-card-section__title {
@@ -12,7 +13,7 @@
   line-height: 39px;
   text-transform: uppercase;
   color: $color-white;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   margin-top: 52px;
   align-items: center;
 
@@ -28,6 +29,7 @@
 }
 
 .product-card {
+  position: relative;
   width: 325px;
   height: 385px;
   min-width: 325px;
@@ -100,13 +102,17 @@
   width: 137px;
   padding: 10px 16px 10px 19px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   img {
     margin-left: 12px;
   }
 }
 
 .glider-contain__button_prev {
-   left: 80px;
+  left: 80px;
 }
 
 .glider-contain__button_next {
@@ -128,6 +134,64 @@
 
   &:hover {
     cursor: pointer;
-    background:$color-identical-green;
+    background: $color-identical-green;
   }
+}
+
+.product-counter {
+  @include flex-center;
+  width: 62px;
+  height: 44px;
+
+  &:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.product-card__remove-button {
+  &:before {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 18px;
+    border-radius: 20px;
+    background-color: $color-white;
+  }
+}
+
+.product-card__add-button {
+  &:before {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 18px;
+    border-radius: 20px;
+    background-color: $color-white;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 18px;
+    border-radius: 20px;
+    background-color: $color-white;
+    transform: rotate(90deg);
+    margin-left: -18px;
+  }
+}
+
+.product-card__label{
+  position: absolute;
+  @include flex-center;
+  top: -10px;
+  right: -10px;
+  width: 50px;
+  height: 50px;
+  color: $color-white;
+  background: $color-identical-green;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px
 }
