@@ -18,9 +18,7 @@ task('scripts', function() {
         .pipe(babel({
             presets: ['@babel/env']
         }))
-        .pipe(uglify({
-            toplevel: true
-        }))
+        .pipe(uglify())
         .pipe(dest('./public/scripts/'))
 
 });
