@@ -21,7 +21,7 @@ for (const slider of list) {
         slidesToShow: 5,
         exactWidth: true,
         itemWidth: 345,
-        draggable: true,
+        draggable: false,
         arrows: {
             prev: gliderPrev,
             next: gliderNext

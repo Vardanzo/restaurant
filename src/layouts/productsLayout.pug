@@ -5,10 +5,12 @@ div.glider-contain.product-card-section
   div.glider.product-card-section__list
       each product in products
         div.product-card(dataId=product.id)
-          img.product-card__img(src=product.img)
+          a.product-card__link(href="/product.html")
+            img.product-card__img(src=product.img)
           div.product-card__info
             div.product-card__title-block
-              div.product-card__title #{product.name}
+              a.product-card__link(href="/product.html")
+                div.product-card__title #{product.name}
               div.product-card__weight Вес: #{product.weight} г
             div.product-card__description #{product.description}
             div.product-card__price-block

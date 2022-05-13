@@ -56,3 +56,7 @@ window.addEventListener("scroll", function () {
         scrollBackButton.remove()
     }
 })
+
+document.querySelector(".back-button")?.addEventListener("click", function (){
+    history.back();
+})

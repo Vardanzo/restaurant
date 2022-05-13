@@ -46,20 +46,32 @@ function setCardLabelValue(card, value) {
     card.querySelector(".product-card__label").innerText = value;
 }
 
+function createProductObject(productCard) {
+    return {
+        name: productCard.querySelector(".product-card__title").innerText,
+        description: productCard.querySelector(".product-card__description").innerText,
+        img: productCard.querySelector(".product-card__img").getAttribute("src"),
+        weight: parseInt(productCard.querySelector(".product-card__weight").innerText.slice(5)),
+        price: parseInt(productCard.querySelector(".product-card__price").innerText),
+        id: productCard.getAttribute("dataId")
+    };
+}
+
 document.querySelector("#menuList").addEventListener("click", function (event) {
+    event.preventDefault();
+
     let basket = getBasket();
 
     let productCard = event.target.closest(".product-card");
 
+    if (event.target.closest(".product-card__link")) {
+        localStorage.setItem("currentProduct", JSON.stringify(createProductObject(productCard)));
+        window.open("/product.html", "_self");
+        return;
+    }
+
     if (event.target.closest(".product-card__button")) {
-        let product = {
-            name: productCard.querySelector(".product-card__title").innerText,
-            description: productCard.querySelector(".product-card__description").innerText,
-            img: productCard.querySelector(".product-card__img").getAttribute("src"),
-            weight: parseInt(productCard.querySelector(".product-card__weight").innerText.slice(5)),
-            price: parseInt(productCard.querySelector(".product-card__price").innerText),
-            id: productCard.getAttribute("dataId")
-        };
+        let product = createProductObject(productCard);
         basket.push({
             product,
             count: 1
@@ -70,6 +82,8 @@ document.querySelector("#menuList").addEventListener("click", function (event) {
         productCard.append(createCardLabel(1));
 
         showCounter(productCard);
+        setBasket(basket);
+        return;
     }
 
     let productId = productCard.getAttribute("dataId");
@@ -109,10 +123,10 @@ function initBasket() {
     if (basket.length) {
         document.querySelector("#amountItemsInBucket").innerText = basket.length;
         basket.forEach(function (value) {
-            let currenProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
-            showCounter(currenProductCard);
-            currenProductCard.append(createCardLabel(value.count));
-            setCardPrice(currenProductCard, value.product.price * value.count)
+            let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
+            showCounter(currentProductCard);
+            currentProductCard.append(createCardLabel(value.count));
+            setCardPrice(currentProductCard, value.product.price * value.count)
         })
     }
 }
