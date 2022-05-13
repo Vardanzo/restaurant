@@ -225,12 +225,13 @@ body, button, input, textarea {
   line-height: 17px;
   border: none;
   align-items: center;
+
   &:hover {
     cursor: pointer;
   }
 }
 
-.button_hidden{
+.button_hidden {
   display: none !important;
 }
 
@@ -442,7 +443,7 @@ body, button, input, textarea {
   margin-bottom: 26px;
 }
 
-.info-section__text-wrapper{
+.info-section__text-wrapper {
   position: relative;
   height: 225px;
   margin-bottom: 60px;
@@ -461,7 +462,7 @@ body, button, input, textarea {
   line-height: 25px;
 }
 
-.info-section__text_active{
+.info-section__text_active {
   opacity: 1;
 }
 
@@ -500,9 +501,11 @@ body, button, input, textarea {
 
   &:hover {
     cursor: pointer;
+
     path {
       fill: $color-identical-green;
     }
+
     color: $color-identical-green;
   }
 
@@ -513,7 +516,7 @@ body, button, input, textarea {
   }
 }
 
-.advantages-section__layout{
+.advantages-section__layout {
   position: absolute;
   top: 0;
   left: 0;
