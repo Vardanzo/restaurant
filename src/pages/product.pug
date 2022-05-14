@@ -5,9 +5,10 @@ block head
   link(rel="stylesheet" href="styles/products.css")
   link(rel="stylesheet" href="styles/contactsSection.css")
   script(src="scripts/product.js" defer)
+  script(src="scripts/basket.js" defer)
 
 block vars
-  - var title = "Страница товара"
+    - var title = "Страница товара"
 
 block content
   button.back-button
@@ -19,17 +20,19 @@ block content
           stop(stop-color="#618967")
           stop(offset="1" stop-color="#72A479")
     span Вернуться назад
-  div.product-section
-    img.product-section__img
+  div.product-section(tagId="productCard")
+    img.product-section__img(tagId="productCardImg")
     div.product-section__info-block
       div.info-block
         div.info-block__description
-          h3.info-block__title
-          div.info-block__text
-          div.info-block__weight
+          h3.info-block__title(tagId="productCardTitle")
+          div.info-block__text(tagId="productCardDescription")
+          div.info-block__weight(tagId="productCardWeight")
         div.info-block__price-section
-         button.button.info-bock__buy-button Корзина
-         div.info-block__price
+          button.button.info-bock__buy-button(tagId="productCardButton") Корзина
+          button.button.info-block__remove-button.product-card-counter.button_hidden(tagId="productCardRemoveButton")
+          div.info-block__price(tagId="productCardPrice")
+          button.button.info-block__add-button.product-card-counter.button_hidden(tagId="productCardAddButton")
       div.kbzhu-weight
         div.kbzhu-weight__titles
           div Белки

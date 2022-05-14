@@ -4,19 +4,19 @@ div.glider-contain.product-card-section
   h3.product-card-section__title #{title}
   div.glider.product-card-section__list
       each product in products
-        div.product-card(dataId=product.id)
-          a.product-card__link(href="/product.html")
-            img.product-card__img(src=product.img)
+        div.product-card(dataId=product.id tagId="productCard")
+          a.product-card__link(href="/product.html" tagId="productCardLink")
+            img.product-card__img(src=product.img tagId="productCardImg")
           div.product-card__info
             div.product-card__title-block
-              a.product-card__link(href="/product.html")
-                div.product-card__title #{product.name}
-              div.product-card__weight Вес: #{product.weight} г
-            div.product-card__description #{product.description}
+              a.product-card__link(href="/product.html" tagId="productCardLink")
+                div.product-card__title(tagId="productCardTitle") #{product.name}
+              div.product-card__weight(tagId="productCardWeight") Вес: #{product.weight} г
+            div.product-card__description(tagId="productCardDescription") #{product.description}
             div.product-card__price-block
-              button.button.product-card__remove-button.product-counter.button_hidden
-              div.product-card__price #{product.price} ₽
-              button.button.product-card__add-button.product-counter.button_hidden
-              button.button.product-card__button
+              button.button.product-card__remove-button.product-counter.button_hidden(tagId="productCardRemoveButton")
+              div.product-card__price(tagId="productCardPrice") #{product.price} ₽
+              button.button.product-card__add-button.product-counter.button_hidden(tagId="productCardAddButton")
+              button.button.product-card__button(tagId="productCardButton")
                 span В корзину
                 img(src="assets/icons/basket.svg")
