@@ -405,15 +405,17 @@ body, button, input, textarea {
 }
 
 .scroll-back-button {
-  border: none;
+  @include flex-center;
   position: fixed;
+  border: none;
   left: 40px;
   bottom: 80px;
-  @include flex-center;
   height: 64px;
   width: 64px;
   border-radius: 50%;
   background: $color-white;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
 
   &:hover {
     cursor: pointer;
