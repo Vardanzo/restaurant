@@ -150,34 +150,17 @@
 
 .product-card__remove-button {
   &:before {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 18px;
-    border-radius: 20px;
-    background-color: $color-white;
+    @include counter-button;
   }
 }
 
 .product-card__add-button {
   &:before {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 18px;
-    border-radius: 20px;
-    background-color: $color-white;
+    @include counter-button;
   }
 
   &:after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 18px;
-    border-radius: 20px;
-    background-color: $color-white;
-    transform: rotate(90deg);
-    margin-left: -18px;
+    @include counter-button(true);
   }
 }
 
@@ -195,3 +178,4 @@
   font-size: 20px;
   line-height: 24px
 }
+

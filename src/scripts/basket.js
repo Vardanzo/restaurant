@@ -1,13 +1,13 @@
 function showCounter(card) {
-    card.querySelector(".product-card__button").classList.add("button_hidden");
-    card.querySelector(".product-card__remove-button").classList.remove("button_hidden");
-    card.querySelector(".product-card__add-button").classList.remove("button_hidden");
+    card.querySelector('[tagId="productCardButton"]').classList.add("button_hidden");
+    card.querySelector('[tagId="productCardRemoveButton"]').classList.remove("button_hidden");
+    card.querySelector('[tagId="productCardAddButton"]').classList.remove("button_hidden");
 }
 
 function hideCounter(card) {
-    card.querySelector(".product-card__button").classList.remove("button_hidden");
-    card.querySelector(".product-card__remove-button").classList.add("button_hidden");
-    card.querySelector(".product-card__add-button").classList.add("button_hidden");
+    card.querySelector('[tagId="productCardButton"]').classList.remove("button_hidden");
+    card.querySelector('[tagId="productCardRemoveButton"]').classList.add("button_hidden");
+    card.querySelector('[tagId="productCardAddButton"]').classList.add("button_hidden");
 }
 
 function getBasket() {
@@ -32,7 +32,7 @@ function changeBasketButtonCount(operator) {
 }
 
 function setCardPrice(card, price) {
-    card.querySelector(".product-card__price").innerText = price + ' ₽';
+    card.querySelector('[tagId="productCardPrice"]').innerText = price + ' ₽';
 }
 
 function createCardLabel(count) {
@@ -46,32 +46,47 @@ function setCardLabelValue(card, value) {
     card.querySelector(".product-card__label").innerText = value;
 }
 
-document.querySelector("#menuList").addEventListener("click", function (event) {
+function createProductObject(productCard) {
+    return {
+        name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
+        description: productCard.querySelector('[tagId="productCardDescription"]').innerText,
+        img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
+        weight: parseInt(productCard.querySelector('[tagId="productCardWeight"]').innerText.slice(5)),
+        price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
+        id: productCard.getAttribute("dataId")
+    };
+}
+
+function canDo(event) {
+    return event.target.closest('[tagId="productCardAddButton"]')
+        || event.target.closest('[tagId="productCardRemoveButton"]')
+        || event.target.closest('[tagId="productCardButton"]')
+        || event.target.closest('[tagId="productCardLink"]');
+}
+
+function handleLinkClick(productCard) {
+    localStorage.setItem("currentProduct", JSON.stringify(createProductObject(productCard)));
+    window.open("/product.html", "_self");
+}
+
+function handleAddProduct(productCard) {
     let basket = getBasket();
+    let product = createProductObject(productCard);
+    basket.push({
+        product,
+        count: 1
+    });
 
-    let productCard = event.target.closest(".product-card");
+    changeBasketButtonCount("inc");
 
-    if (event.target.closest(".product-card__button")) {
-        let product = {
-            name: productCard.querySelector(".product-card__title").innerText,
-            description: productCard.querySelector(".product-card__description").innerText,
-            img: productCard.querySelector(".product-card__img").getAttribute("src"),
-            weight: parseInt(productCard.querySelector(".product-card__weight").innerText.slice(5)),
-            price: parseInt(productCard.querySelector(".product-card__price").innerText),
-            id: productCard.getAttribute("dataId")
-        };
-        basket.push({
-            product,
-            count: 1
-        });
+    productCard.append(createCardLabel(1));
 
-        changeBasketButtonCount("inc");
+    showCounter(productCard);
+    setBasket(basket);
+}
 
-        productCard.append(createCardLabel(1));
-
-        showCounter(productCard);
-    }
-
+function handleChangeProductAmount(productCard, direction) {
+    let basket = getBasket();
     let productId = productCard.getAttribute("dataId");
     let currentProductIndex = basket.findIndex(function (value) {
         return productId === value.product.id;
@@ -79,40 +94,74 @@ document.querySelector("#menuList").addEventListener("click", function (event) {
     let currentProduct = basket[currentProductIndex];
     let currentProductPriceSum = currentProduct.product.price * currentProduct.count;
 
-    if (event.target.closest(".product-card__add-button")) {
-        let price = currentProductPriceSum + currentProduct.product.price;
-        setCardPrice(productCard, price);
-        currentProduct.count += 1;
-        setCardLabelValue(productCard, currentProduct.count);
-    }
-
-    if (event.target.closest(".product-card__remove-button")) {
-        if (currentProduct.count > 1) {
-            let price = currentProductPriceSum - currentProduct.product.price;
+    switch (direction) {
+        case "+": {
+            let price = currentProductPriceSum + currentProduct.product.price;
             setCardPrice(productCard, price);
-            currentProduct.count -= 1;
+            currentProduct.count += 1;
             setCardLabelValue(productCard, currentProduct.count);
-        } else {
-            productCard.querySelector(".product-card__label").remove();
-            basket.splice(currentProductIndex, 1);
-            hideCounter(productCard);
+            break;
+        }
+        case "-": {
+            if (currentProduct.count > 1) {
+                let price = currentProductPriceSum - currentProduct.product.price;
+                setCardPrice(productCard, price);
+                currentProduct.count -= 1;
+                setCardLabelValue(productCard, currentProduct.count);
+            } else {
+                productCard.querySelector(".product-card__label").remove();
+                basket.splice(currentProductIndex, 1);
+                hideCounter(productCard);
 
-            changeBasketButtonCount("dec");
+                changeBasketButtonCount("dec");
+            }
+            break;
+        }
+        default: {
+            return;
         }
     }
-
     setBasket(basket);
-})
+}
+
+function handleCardClick(event) {
+    event.preventDefault();
+    if (canDo(event)) {
+        let productCard = event.target.closest('[tagId="productCard"]');
+
+        if (event.target.closest('[tagId="productCardLink"]')) {
+            handleLinkClick(productCard);
+        }
+
+        if (event.target.closest('[tagId="productCardButton"]')) {
+            handleAddProduct(productCard);
+        }
+
+        if (event.target.closest('[tagId="productCardAddButton"]')) {
+            handleChangeProductAmount(productCard, "+")
+        }
+
+        if (event.target.closest('[tagId="productCardRemoveButton"]')) {
+            handleChangeProductAmount(productCard, "-")
+        }
+    }
+}
+
+document.querySelector("#menuList")?.addEventListener("click", handleCardClick);
+document.querySelector(".related-products")?.addEventListener("click", handleCardClick);
+document.querySelector(".product-section")?.addEventListener("click", handleCardClick);
 
 function initBasket() {
     let basket = getBasket();
     if (basket.length) {
         document.querySelector("#amountItemsInBucket").innerText = basket.length;
         basket.forEach(function (value) {
-            let currenProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
-            showCounter(currenProductCard);
-            currenProductCard.append(createCardLabel(value.count));
-            setCardPrice(currenProductCard, value.product.price * value.count)
+            let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
+            if (currentProductCard){
+                showCounter(currentProductCard);
+                currentProductCard.append(createCardLabel(value.count));
+                setCardPrice(currentProductCard, value.product.price * value.count);
+            }
         })
     }
 }

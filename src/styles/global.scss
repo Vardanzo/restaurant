@@ -533,3 +533,25 @@ body, button, input, textarea {
     margin-bottom: 0;
   }
 }
+
+
+.back-button {
+  margin-top: 40px;
+  margin-left: 116px;
+  @include flex-center;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: $color-white;
+
+  svg {
+    margin-right: 10px;
+  }
+
+  &:hover{
+    cursor: pointer;
+    color: $color-identical-green;
+  }
+}
