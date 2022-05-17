@@ -1,0 +1,73 @@
+@import "_/_variables";
+@import "_/_mixins";
+
+.promotion-section{
+  padding-top: 10px;
+}
+
+.promotion-section__title {
+  display: flex;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  text-transform: uppercase;
+  color: $color-white;
+  padding-bottom: 36px;
+  margin-top: 52px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 33px;
+    width: 4px;
+    background-color: $color-identical-green;
+    margin-left: 91px;
+    margin-right: 19px;
+  }
+}
+
+.promotion-section__card-block{
+  padding: 40px 40px 70px 40px;
+  display: grid;
+  gap: 50px 20px;
+  grid-template-columns: repeat(3, 440px);
+}
+
+.promotion-section__card{
+  background: $gradient-product-card-background;
+  border-radius: 10px;
+  max-width: 440px;
+  &:hover{
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.promotion-section__description{
+  padding: 15px 25px;
+}
+
+.promotion-section__card-title{
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: $color-white;
+  margin-bottom: 5px;
+}
+
+.description-style{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.promotion-section__card-text{
+  color: $color-simple-text;
+  margin-bottom: 19px;
+}
+
+.promotion-section__card-date{
+ color: $color-identical-green;
+}
