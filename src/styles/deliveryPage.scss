@@ -1,0 +1,120 @@
+@import "_/_variables";
+@import "_/_mixins";
+
+.delivery-section {
+  margin: 52px 69px 37px 93px;
+}
+
+.delivery-section__title {
+  display: flex;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  text-transform: uppercase;
+  color: $color-white;
+  margin-bottom: 40px;
+  align-items: center;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 33px;
+    width: 4px;
+    background-color: $color-identical-green;
+    margin-left: 91px;
+    margin-right: 19px;
+  }
+}
+
+.delivery-section__main-block {
+  display: flex;
+}
+
+.delivery-section__faq {
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+.faq-item {
+  margin-bottom: 10px;
+  height: 68px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: $gradient-product-card-background;
+}
+
+.faq-item_active {
+  height: auto;
+}
+
+.faq-item__button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 22px 17px 30px;
+}
+
+.faq-item__title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 35px;
+  color: $color-white;
+}
+
+.faq-item__description {
+  padding: 37px 41px 40px 30px;
+  width: 618px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  color: $color-white;
+}
+
+.faq-item__icon_active {
+  transform: rotate(180deg);
+}
+
+.delivery-section__graphics {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.delivery-section__graphics-item {
+  margin-right: 100px;
+
+  span {
+    font-weight: 700;
+    color: $color-white;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-weight: 400;;
+    color: $color-simple-text;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.text-size {
+  font-size: 22px;
+  line-height: 35px;
+}
+
+.delivery-section__dop-info {
+  span {
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  p {
+    font-weight: 400;;
+    color: $color-simple-text;
+  }
+  &:last-child{
+    width: 697px;
+  }
+}
