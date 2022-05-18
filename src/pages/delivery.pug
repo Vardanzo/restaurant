@@ -1,0 +1,34 @@
+extends ../layouts/pageLayout
+
+block vars
+  - var title = "Условия доставки"
+  - var faqItems =[{title:"У наших курьеров всегда должна быть сдача!",id:"#1",description:"У наших курьеров всегда должна быть сдача вне зависимости от наминала купюр, которыми производится оплата заказа"},{title:"Вам что-то не довезли?",id:"#2",description:"Свяжитесь с нами в рабочее время и мы возместим вам стоимость отсутствующего блюда"},{title:"Не понравился продукт?",id:"#3",description:"Оставьте нам свой отзыв, то поможет нам стать лучше"},{title:"Если появились замечания",id:"#4",description:"Мы очень внимательно следим за качеством нашей работы, поэтому, если у вас будут какие-либо замечания или предложения, то обязательно сообщайте их нам"},{title:"Оплата Visa, MasterCard и МИР",id:"#5",description:"Оплатить заказ можно курьеру банковскими картами Visa, MasterCard и МИР"},{title:"Максимальное время доставки 40 минут",id:"#6",description:"Если вам не доставили заказ в течение сорока минут после его приготовления, мы вернем вам сумму заказа"}]
+block head
+  link(rel="stylesheet" href="styles/deliveryPage.css")
+  script(src="scripts/delivery.js" defer)
+
+block content
+  div.delivery-section
+    h3.delivery-section__title Условия доставки
+    div.delivery-section__main-block
+      div.delivery-section__faq
+        each faqItem in faqItems
+          div.faq-item(id=faqItem.id)
+            button.button.faq-item__button
+              span.faq-item__title #{faqItem.title}
+              svg.faq-item__icon(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+                path(d="M19 8.5L12 15.5L5 8.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+            div.faq-item__description #{faqItem.description}
+      img.delivery-section__map(src="../assets/img/delivery/map.png")
+    div.delivery-section__info-block
+      div.delivery-section__graphics
+        div.delivery-section__graphics-item
+          span.text-size График работы доставки:
+          p.text-size с 10:00-21:00
+        div.delivery-section__graphics-item
+          span.text-size График работы ресторана:
+          p.text-size с 08:00-21:00
+      div.delivery-section__dop-info
+        span.text-size Минимальный заказ:
+        p.text-size Бесплатная доставка пешим курьером при сумме заказа от 400 ₽, Доставка оператором такси от любой суммы заказа - по тарифам перевозчика.
+
