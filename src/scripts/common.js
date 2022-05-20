@@ -1,4 +1,8 @@
 const NAVIGATION_HEIGHT = 78;
+const BORDER_WIDTH = 1;
+const SCROLL_STEP = 100;
+const MENU_LIST_START_Y = 583;
+const NAV_PADDING_SUM = 160;
 
 function createScrollBackButton() {
     let scrollBackButton = document.createElement('button');
@@ -11,7 +15,7 @@ function createScrollBackButton() {
 
     function scrollToTop() {
         if (scrollY > 0) {
-            window.scrollBy(0, -100);
+            window.scrollBy(0, -SCROLL_STEP);
             setTimeout(scrollToTop, 20);
         }
     }
@@ -26,11 +30,15 @@ document.querySelector("body").append(scrollBackButton);
 let navLinks = document.querySelectorAll(".restaurant-menu__link");
 
 function getPosition(element) {
-    return document.documentElement.scrollTop + element.getBoundingClientRect().y;
+    return document.documentElement.scrollTop + element.getBoundingClientRect().y + BORDER_WIDTH;
 }
 
-function scrollToTarget(event) {
+function handleClickNavMenuItem(event){
     let targetId = event.target.getAttribute("to");
+    scrollToTarget(targetId);
+}
+
+function scrollToTarget(targetId) {
     let target = document.getElementById(targetId);
     let targetPosition = getPosition(target);
     let offsetTargetPosition = targetPosition - NAVIGATION_HEIGHT;
@@ -41,37 +49,56 @@ function scrollToTarget(event) {
     })
 }
 
-for (const navLink of navLinks) {
-    navLink.addEventListener("click", scrollToTarget);
+function changeToMainPage(event) {
+    history.pushState({targetId: event.target.getAttribute("to")}, null, "/")
+    history.go(0);
 }
 
 let sections = document.querySelectorAll(".menu-list__item");
 
-function changeNavActiveItem() {
-    for (let i = 0; i < sections.length; i++) {
-        let {y: sectionY, height: sectionHeight} = sections[i].getBoundingClientRect();
-        let li = document.querySelector(`[to="${sections[i].id}"]`).parentNode
+for (const navLink of navLinks) {
+    if (sections.length) {
+        navLink.addEventListener("click", handleClickNavMenuItem);
+    } else {
+        navLink.addEventListener("click", changeToMainPage);
+    }
+}
 
-        if (sectionY <= NAVIGATION_HEIGHT - 1 && sectionY > NAVIGATION_HEIGHT - sectionHeight) {
-            li.classList.add("restaurant-menu__item_active");
-        } else {
-            li.classList.remove("restaurant-menu__item_active");
+function changeNavActiveItem() {
+    if (sections.length) {
+        for (let i = 0; i < sections.length; i++) {
+            let {y: sectionY, height: sectionHeight} = sections[i].getBoundingClientRect();
+            let li = document.querySelector(`[to="${sections[i].id}"]`).parentNode
+
+            if (sectionY <= NAVIGATION_HEIGHT && sectionY > NAVIGATION_HEIGHT - sectionHeight) {
+                li.classList.add("restaurant-menu__item_active");
+            } else {
+                li.classList.remove("restaurant-menu__item_active");
+            }
         }
+    }
+}
+
+function setMenuListPadding(value) {
+    let menuList = document.querySelector(".menu-list");
+    if (menuList) {
+        menuList.style.paddingTop = value;
     }
 }
 
 window.addEventListener("scroll", function () {
     changeNavActiveItem();
     let headerBottomSection = document.querySelector(".header__bottom-section");
-    if (scrollY >= 583) {
+    if (scrollY >= MENU_LIST_START_Y) {
         headerBottomSection.classList.add("header__bottom-section_fixed");
-        headerBottomSection.style.width = document.querySelector(".wrapper").clientWidth - 160 + 'px';
-        document.querySelector(".menu-list").style.paddingTop = `${NAVIGATION_HEIGHT}px`;
+        headerBottomSection.style.width = document.querySelector(".wrapper").clientWidth - NAV_PADDING_SUM + 'px';
+        setMenuListPadding(`${NAVIGATION_HEIGHT}px`);
         scrollBackButton.style.opacity = "1";
     } else {
         headerBottomSection.classList.remove("header__bottom-section_fixed");
         headerBottomSection.style.width = "auto";
         scrollBackButton.style.opacity = "0";
+        setMenuListPadding("0");
 
     }
 })
@@ -79,3 +106,11 @@ window.addEventListener("scroll", function () {
 document.querySelector(".back-button")?.addEventListener("click", function () {
     history.back();
 })
+
+function checkHistoryState(){
+    let targetId = history.state?.targetId;
+   if (targetId){
+       scrollToTarget(targetId);
+   }
+}
+checkHistoryState();
