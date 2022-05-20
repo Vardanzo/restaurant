@@ -52,7 +52,7 @@ function changeNavActiveItem() {
         let {y: sectionY, height: sectionHeight} = sections[i].getBoundingClientRect();
         let li = document.querySelector(`[to="${sections[i].id}"]`).parentNode
 
-        if (sectionY <= NAVIGATION_HEIGHT && sectionY > NAVIGATION_HEIGHT - sectionHeight - 52) {
+        if (sectionY <= NAVIGATION_HEIGHT - 1 && sectionY > NAVIGATION_HEIGHT - sectionHeight) {
             li.classList.add("restaurant-menu__item_active");
         } else {
             li.classList.remove("restaurant-menu__item_active");
@@ -66,6 +66,7 @@ window.addEventListener("scroll", function () {
     if (scrollY >= 583) {
         headerBottomSection.classList.add("header__bottom-section_fixed");
         headerBottomSection.style.width = document.querySelector(".wrapper").clientWidth - 160 + 'px';
+        document.querySelector(".menu-list").style.paddingTop = `${NAVIGATION_HEIGHT}px`;
         scrollBackButton.style.opacity = "1";
     } else {
         headerBottomSection.classList.remove("header__bottom-section_fixed");
