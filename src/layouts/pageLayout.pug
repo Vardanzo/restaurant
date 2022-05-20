@@ -1,6 +1,6 @@
 block vars
 
-- var restaurantMenuItems=[{name:"Холодные закуски",link:"#coldSnacks"},{name:"Горячие закуски",link:"#hotSnacks"},{name:"Мясные блюда",link:"#meatFood"},{name:"Супы",link:"#soups"},{name:"Рыбные блюда",link:"#fishFood"},{name:"Гриль меню",link:"#grillMenu"},{name:"Фирменые блюда",link:"#brandedFood"},{name:"Напитки",link:"#drinks"}]
+- var restaurantMenuItems=[{name:"Холодные закуски",id:"coldSnacks"},{name:"Горячие закуски",id:"hotSnacks"},{name:"Мясные блюда",id:"meatFood"},{name:"Супы",id:"soups"},{name:"Рыбные блюда",id:"fishFood"},{name:"Гриль меню",id:"grillMenu"},{name:"Фирменые блюда",id:"brandedFood"},{name:"Напитки",id:"drinks"}]
 - var restaurantDocumentationItems=[{name:"Пользовательское соглашение",link:"#"},{name:"Карта сайта",link:"#"},{name:"Политика конфиденциальности",link:"#"}]
 - var restaurantDetailedInformation=[{name:"О ресторане",link:"/about"},{name:"Условия доставки",link:"/delivery.html"},{name:"Возврат товара",link:"/purchaseReturn"},{name:"Акции",link:"/promotions"}]
 
@@ -43,7 +43,7 @@ html(lang="ru")
           ul.restaurant-menu
               each menuItem in restaurantMenuItems
                 li.restaurant-menu__item
-                  a.restaurant-menu__link(href=menuItem.link) #{menuItem.name}
+                  a.restaurant-menu__link(to=menuItem.id) #{menuItem.name}
       main
         block content
       footer.footer
