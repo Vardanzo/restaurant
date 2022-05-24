@@ -66,7 +66,8 @@ function canDo(event) {
     return event.target.closest('[tagId="productCardAddButton"]')
         || event.target.closest('[tagId="productCardRemoveButton"]')
         || event.target.closest('[tagId="productCardButton"]')
-        || event.target.closest('[tagId="productCardLink"]');
+        || event.target.closest('[tagId="productCardLink"]')
+        || event.target.closest('[tagId="removeFromBasketButton"]');
 }
 
 function handleLinkClick(productCard) {
@@ -142,14 +143,37 @@ function handleChangeProductAmount(productCard, direction) {
 }
 
 function removeFromBasket(productCard) {
-    console.log('dddd')
     let basket = getBasket();
     let currentProductInBasket = basket.findIndex(function (value) {
         return value.product.id === productCard.getAttribute("dataId");
     })
-    basket.slice(currentProductInBasket, 1);
+    basket.splice(currentProductInBasket, 1);
     setBasket(basket);
+
+    let addToOrder = JSON.parse(localStorage.getItem("addToOrder"));
+    if (addToOrder) {
+        let addToOrderProduct = addToOrder.find(function (value) {
+            return value.id === productCard.getAttribute("dataId");
+        })
+        if (addToOrderProduct) {
+            let newProduct = `
+             <div class="add-to-order__item" dataId="${addToOrderProduct.id}" dataDescription="${addToOrderProduct.description}" dataWeight="${addToOrderProduct.weight}">
+                <img class="add-to-order__img" src="${addToOrderProduct.img}" alt="${addToOrderProduct.name}">
+                <div class="add-to-order__title">${addToOrderProduct.name}</div> 
+                <div class="add-to-order__text-block">
+                    <span class="add-to-order__text">Добавить</span> 
+                    <button class="button add-to-order__add-button add-to-order__add-button-counter"></button>
+                </div>
+                <div class="add-to-order__price">${addToOrderProduct.price} ₽</div> 
+             </div>
+            `
+            document.querySelector(".add-to-order__items-block").append(newProduct);
+        }
+
+    }
+
     productCard.remove();
+    changeBasketButtonCount("dec");
 }
 
 function handleCardClick(event) {
@@ -172,10 +196,9 @@ function handleCardClick(event) {
         if (event.target.closest('[tagId="productCardRemoveButton"]')) {
             handleChangeProductAmount(productCard, "-")
         }
-console.log(event.target.closest('[tagId="removeFromBasketButton"]'))
         if (event.target.closest('[tagId="removeFromBasketButton"]')) {
-            console.log('fff')
             removeFromBasket(productCard);
+
         }
     }
 }
@@ -186,17 +209,23 @@ function initBasket() {
     let basket = getBasket();
     if (basket.length) {
         document.querySelector("#amountItemsInBucket").innerText = basket.length;
-        basket.forEach(function (value) {
-            let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
-            if (currentProductCard) {
-                showCounter(currentProductCard);
-                if (location.pathname !== "/basket.html") {
+        if (location.pathname !== "/basket.html") {
+            basket.forEach(function (value) {
+                let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
+                if (currentProductCard) {
+                    showCounter(currentProductCard);
                     currentProductCard.append(createCardLabel(value.count));
+                    setCardPrice(currentProductCard, value.product.price * value.count);
                 }
-                setCardPrice(currentProductCard, value.product.price * value.count);
-            }
-        })
+            })
+        }
     }
 }
 
 initBasket();
+
+window.basketAPI = {
+    changeBasketButtonCount,
+    getBasket,
+    setBasket
+};
