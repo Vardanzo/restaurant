@@ -225,9 +225,13 @@ body, button, input, textarea {
   line-height: 17px;
   border: none;
   align-items: center;
+  cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
+  &:disabled {
+    background: $color-button-disabled;
+    &:hover{
+      cursor: default;
+    }
   }
 }
 
@@ -557,4 +561,8 @@ body, button, input, textarea {
     cursor: pointer;
     color: $color-identical-green;
   }
+}
+
+.header__link{
+  text-decoration: none;
 }

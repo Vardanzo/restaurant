@@ -1,0 +1,39 @@
+extends ../layouts/pageLayout
+
+block vars
+    - var title = "Корзина"
+    - var showBackButton = true
+    - var addToOrderItems = [{name:"Гусь",description:"Фаршированный яблоками",id:"71",img:"assets/img/products/goose.png",weight:"225",price:"17900"},{name:"Утка",description:"Фаршированная рисом, курагой и айвой",id:"72",img:"assets/img/products/duck.png",weight:"225",price:"220"},{name:"Ягненок",description:"Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",id:"73",img:"assets/img/products/lamb.png",weight:"225",price:"520"},{name:"Индейка",description:"Фаршированный гречневой кашей, курагой, апельсином и зеленым яблоком",id:"74",img:"assets/img/products/turkey.png",weight:"225",price:"1625"}]
+
+block head
+  link(rel="stylesheet"  href="styles/basketPage.css")
+  script(src="scripts/basketPage.js" defer)
+  script(src="scripts/basket.js" defer)
+
+block content
+  div.basket-page__wrapper
+    h3.basket-page__title Корзина
+      div.basket-page-items-counter
+    div.basket-page__products-section(tagId="cardsSection")
+    div.add-to-order
+      h3.add-to-order__block-title Добавить к заказу
+      div.add-to-order__items-block
+        each addToOrderItem in addToOrderItems
+          div.add-to-order__item(tagId="cardsSection")
+            img.add-to-order__img(src=addToOrderItem.img)
+            div.add-to-order__title #{addToOrderItem.name}
+            div.add-to-order__text-block
+              span.add-to-order__text Добавить
+              button.button.add-to-order__add-button.add-to-order__add-button-counter
+            div.add-to-order__price #{addToOrderItem.price} ₽
+    div.ordering-block
+      div.ordering-block__info
+        div.ordering-block__sum
+          p Итого:
+            span ₽
+        div.ordering-block__free-delivery
+          p До бесплатной доставки не хватет:
+            span 100 ₽
+        div.ordering-block__min-order-sum Минимальная сума заказа 1500 ₽
+      div
+        button.button.ordering-block__button Оформить заказ
