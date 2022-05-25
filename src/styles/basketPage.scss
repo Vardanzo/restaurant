@@ -31,6 +31,7 @@
   line-height: 18px;
   text-transform: lowercase;
   color: $color-identical-green;
+  margin-left: 15px;
 }
 
 .basket-page__products-section {
@@ -261,7 +262,6 @@
   padding: 16px 27px 16px 39px;
 }
 
-
 .ordering-block__button {
   padding: 17px 50px;
 }
@@ -294,6 +294,11 @@
   span {
     color: $color-identical-green;
   }
+}
+
+
+.ordering-block__free-delivery_hidden{
+ display: none;
 }
 
 .ordering-block__min-order-sum {

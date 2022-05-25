@@ -30,10 +30,10 @@ block content
       div.ordering-block__info
         div.ordering-block__sum
           p Итого:
-            span ₽
-        div.ordering-block__free-delivery
+            span.ordering-block__sum-price ₽
+        div.ordering-block__free-delivery(dataId="freeDelivery")
           p До бесплатной доставки не хватет:
-            span 100 ₽
-        div.ordering-block__min-order-sum Минимальная сума заказа 1500 ₽
+            span.ordering-block__check-for-discount 1500 ₽
+        div.ordering-block__min-order-sum Минимальная сума заказа 500 ₽
       div
         button.button.ordering-block__button Оформить заказ

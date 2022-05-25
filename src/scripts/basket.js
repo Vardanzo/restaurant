@@ -1,3 +1,5 @@
+const FREE_DELIVERY = 1500;
+
 function showCounter(card) {
     if (card.querySelector('[tagId="productCardButton"]')) {
         card.querySelector('[tagId="productCardButton"]').classList.add("button_hidden");
@@ -140,6 +142,10 @@ function handleChangeProductAmount(productCard, direction) {
         }
     }
     setBasket(basket);
+    if (location.pathname === "/basket.html")
+        setSumPrice();
+        calcNumberOfProducts();
+        calcFreeDeliverySum();
 }
 
 function removeFromBasket(productCard) {
@@ -149,15 +155,23 @@ function removeFromBasket(productCard) {
     })
     basket.splice(currentProductInBasket, 1);
     setBasket(basket);
+    setSumPrice();
+    calcNumberOfProducts();
+    calcFreeDeliverySum();
 
     let addToOrder = JSON.parse(localStorage.getItem("addToOrder"));
     if (addToOrder) {
-        let addToOrderProduct = addToOrder.find(function (value) {
+        let addToOrderProductIndex = addToOrder.findIndex(function (value) {
             return value.id === productCard.getAttribute("dataId");
         })
-        if (addToOrderProduct) {
-            let newProduct = `
-             <div class="add-to-order__item" dataId="${addToOrderProduct.id}" dataDescription="${addToOrderProduct.description}" dataWeight="${addToOrderProduct.weight}">
+        if (addToOrderProductIndex !== -1) {
+            let addToOrderProduct = addToOrder[addToOrderProductIndex]
+            let newProduct = document.createElement("div");
+            newProduct.classList.add("add-to-order__item");
+            newProduct.setAttribute("dataId", addToOrderProduct.id);
+            newProduct.setAttribute("dataDescription", addToOrderProduct.description);
+            newProduct.setAttribute("dataWeight", addToOrderProduct.weight);
+            newProduct.innerHTML = `
                 <img class="add-to-order__img" src="${addToOrderProduct.img}" alt="${addToOrderProduct.name}">
                 <div class="add-to-order__title">${addToOrderProduct.name}</div> 
                 <div class="add-to-order__text-block">
@@ -165,9 +179,11 @@ function removeFromBasket(productCard) {
                     <button class="button add-to-order__add-button add-to-order__add-button-counter"></button>
                 </div>
                 <div class="add-to-order__price">${addToOrderProduct.price} ₽</div> 
-             </div>
             `
             document.querySelector(".add-to-order__items-block").append(newProduct);
+
+            addToOrder.splice(addToOrderProductIndex, 1);
+            localStorage.setItem("addToOrder", JSON.stringify(addToOrder));
         }
 
     }
@@ -224,8 +240,44 @@ function initBasket() {
 
 initBasket();
 
+function calcSumPrice() {
+    return getBasket().reduce(function (acc, target) {
+        acc += target.product.price * target.count;
+        return acc;
+    }, 0)
+}
+
+function setSumPrice(){
+    document.querySelector(".ordering-block__sum-price").innerHTML = ` ${calcSumPrice()} ₽`
+}
+
+function calcFreeDeliverySum(){
+    let sumBasketPrice = calcSumPrice();
+    let freeDeliveryBlock = document.querySelector('[dataId="freeDelivery"]')
+    let deliveryPrice = document.querySelector(".ordering-block__check-for-discount")
+    if (sumBasketPrice >= FREE_DELIVERY){
+        freeDeliveryBlock.classList.add("ordering-block__free-delivery_hidden");
+    }else{
+        freeDeliveryBlock.classList?.remove("ordering-block__free-delivery_hidden")
+        let deliveryPriceSum = FREE_DELIVERY - sumBasketPrice;
+        deliveryPrice.innerHTML= ` ${deliveryPriceSum} ₽`
+    }
+}
+
+
+function calcNumberOfProducts() {
+    let sumNumberOfProducts = getBasket().reduce(function (acc, target) {
+        acc += target.count;
+        return acc;
+    }, 0)
+    document.querySelector(".basket-page-items-counter").innerHTML = `(в корзине ${sumNumberOfProducts} товара)`
+}
+
 window.basketAPI = {
     changeBasketButtonCount,
     getBasket,
-    setBasket
+    setBasket,
+    setSumPrice,
+    calcNumberOfProducts,
+    calcFreeDeliverySum
 };

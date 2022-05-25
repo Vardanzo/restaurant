@@ -24,24 +24,33 @@ function mapBasket() {
 }
 
 mapBasket();
+window.basketAPI.setSumPrice();
+window.basketAPI.calcNumberOfProducts();
+window.basketAPI.calcFreeDeliverySum();
+checkAddToOrder();
 
-let basket = window.basketAPI.getBasket();
+function checkAddToOrder(){
+    let basket = window.basketAPI.getBasket();
 
-let productCards = document.querySelectorAll(".add-to-order__item");
-for (let i = 0; i < productCards.length; i++) {
-    let productCardId = productCards[i].getAttribute("dataId");
-    let currentProductIndex = basket.findIndex(function (value) {
-        return productCardId === value.product.id
-    })
-    if (currentProductIndex !== -1) {
-        let addToOrder = JSON.parse(localStorage.getItem("addToOrder"));
-        if (addToOrder) {
-            addToOrder.push(getProduct(productCards[i]));
-            localStorage.setItem("addToOrder", JSON.stringify(addToOrder));
-        }else{
-            localStorage.setItem("addToOrder", JSON.stringify([getProduct(productCards[i])]));
+    let productCards = document.querySelectorAll(".add-to-order__item");
+    for (let i = 0; i < productCards.length; i++) {
+        let productCardId = productCards[i].getAttribute("dataId");
+        let currentProductIndex = basket.findIndex(function (value) {
+            return productCardId === value.product.id
+        })
+        if (currentProductIndex !== -1) {
+            let addToOrder = JSON.parse(localStorage.getItem("addToOrder"));
+            if (addToOrder) {
+                addToOrder.push(getProduct(productCards[i]));
+                localStorage.setItem("addToOrder", JSON.stringify(addToOrder));
+            } else {
+                localStorage.setItem("addToOrder", JSON.stringify([getProduct(productCards[i])]));
+            }
+            productCards[i].remove();
+            window.basketAPI.setSumPrice();
+            window.basketAPI.calcNumberOfProducts();
+            window.basketAPI.calcFreeDeliverySum();
         }
-        productCards[i].remove();
     }
 }
 
@@ -69,9 +78,18 @@ addToOrderBlock.addEventListener("click", function (event) {
         });
         window.basketAPI.setBasket(basket);
 
+        checkAddToOrder();
+
         productCard.remove();
 
         window.basketAPI.changeBasketButtonCount("inc");
         mapBasket();
+        window.basketAPI.setSumPrice();
+        window.basketAPI.calcNumberOfProducts();
+        window.basketAPI.calcFreeDeliverySum();
     }
 })
+
+
+
+
