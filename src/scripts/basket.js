@@ -1,13 +1,19 @@
+const FREE_DELIVERY = 1500;
+
 function showCounter(card) {
-    card.querySelector('[tagId="productCardButton"]').classList.add("button_hidden");
-    card.querySelector('[tagId="productCardRemoveButton"]').classList.remove("button_hidden");
-    card.querySelector('[tagId="productCardAddButton"]').classList.remove("button_hidden");
+    if (card.querySelector('[tagId="productCardButton"]')) {
+        card.querySelector('[tagId="productCardButton"]').classList.add("button_hidden");
+        card.querySelector('[tagId="productCardRemoveButton"]').classList.remove("button_hidden");
+        card.querySelector('[tagId="productCardAddButton"]').classList.remove("button_hidden");
+    }
 }
 
 function hideCounter(card) {
-    card.querySelector('[tagId="productCardButton"]').classList.remove("button_hidden");
-    card.querySelector('[tagId="productCardRemoveButton"]').classList.add("button_hidden");
-    card.querySelector('[tagId="productCardAddButton"]').classList.add("button_hidden");
+    if (card.querySelector('[tagId="productCardButton"]')) {
+        card.querySelector('[tagId="productCardButton"]').classList.remove("button_hidden");
+        card.querySelector('[tagId="productCardRemoveButton"]').classList.add("button_hidden");
+        card.querySelector('[tagId="productCardAddButton"]').classList.add("button_hidden");
+    }
 }
 
 function getBasket() {
@@ -38,12 +44,13 @@ function setCardPrice(card, price) {
 function createCardLabel(count) {
     let label = document.createElement("div");
     label.classList.add("product-card__label");
+    label.setAttribute("tagId", "counterLabel")
     label.innerText = count;
     return label;
 }
 
 function setCardLabelValue(card, value) {
-    card.querySelector(".product-card__label").innerText = value;
+    card.querySelector('[tagId="counterLabel"]').innerText = value;
 }
 
 function createProductObject(productCard) {
@@ -61,7 +68,8 @@ function canDo(event) {
     return event.target.closest('[tagId="productCardAddButton"]')
         || event.target.closest('[tagId="productCardRemoveButton"]')
         || event.target.closest('[tagId="productCardButton"]')
-        || event.target.closest('[tagId="productCardLink"]');
+        || event.target.closest('[tagId="productCardLink"]')
+        || event.target.closest('[tagId="removeFromBasketButton"]');
 }
 
 function handleLinkClick(productCard) {
@@ -100,7 +108,14 @@ function handleChangeProductAmount(productCard, direction) {
             setCardPrice(productCard, price);
             currentProduct.count += 1;
             setCardLabelValue(productCard, currentProduct.count);
+            if (location.pathname === "/basket.html") {
+                let removeButton = productCard.querySelector('[tagId="productCardRemoveButton"]');
+                if (removeButton.getAttribute("disabled")) {
+                    removeButton.removeAttribute("disabled");
+                }
+            }
             break;
+
         }
         case "-": {
             if (currentProduct.count > 1) {
@@ -108,6 +123,11 @@ function handleChangeProductAmount(productCard, direction) {
                 setCardPrice(productCard, price);
                 currentProduct.count -= 1;
                 setCardLabelValue(productCard, currentProduct.count);
+                if (location.pathname === "/basket.html") {
+                    if (currentProduct.count <= 1) {
+                        productCard.querySelector('[tagId="productCardRemoveButton"]').setAttribute("disabled", "true")
+                    }
+                }
             } else {
                 productCard.querySelector(".product-card__label").remove();
                 basket.splice(currentProductIndex, 1);
@@ -122,6 +142,54 @@ function handleChangeProductAmount(productCard, direction) {
         }
     }
     setBasket(basket);
+    if (location.pathname === "/basket.html")
+        setSumPrice();
+        calcNumberOfProducts();
+        calcFreeDeliverySum();
+}
+
+function removeFromBasket(productCard) {
+    let basket = getBasket();
+    let currentProductInBasket = basket.findIndex(function (value) {
+        return value.product.id === productCard.getAttribute("dataId");
+    })
+    basket.splice(currentProductInBasket, 1);
+    setBasket(basket);
+    setSumPrice();
+    calcNumberOfProducts();
+    calcFreeDeliverySum();
+
+    let addToOrder = JSON.parse(localStorage.getItem("addToOrder"));
+    if (addToOrder) {
+        let addToOrderProductIndex = addToOrder.findIndex(function (value) {
+            return value.id === productCard.getAttribute("dataId");
+        })
+        if (addToOrderProductIndex !== -1) {
+            let addToOrderProduct = addToOrder[addToOrderProductIndex]
+            let newProduct = document.createElement("div");
+            newProduct.classList.add("add-to-order__item");
+            newProduct.setAttribute("dataId", addToOrderProduct.id);
+            newProduct.setAttribute("dataDescription", addToOrderProduct.description);
+            newProduct.setAttribute("dataWeight", addToOrderProduct.weight);
+            newProduct.innerHTML = `
+                <img class="add-to-order__img" src="${addToOrderProduct.img}" alt="${addToOrderProduct.name}">
+                <div class="add-to-order__title">${addToOrderProduct.name}</div> 
+                <div class="add-to-order__text-block">
+                    <span class="add-to-order__text">Добавить</span> 
+                    <button class="button add-to-order__add-button add-to-order__add-button-counter"></button>
+                </div>
+                <div class="add-to-order__price">${addToOrderProduct.price} ₽</div> 
+            `
+            document.querySelector(".add-to-order__items-block").append(newProduct);
+
+            addToOrder.splice(addToOrderProductIndex, 1);
+            localStorage.setItem("addToOrder", JSON.stringify(addToOrder));
+        }
+
+    }
+
+    productCard.remove();
+    changeBasketButtonCount("dec");
 }
 
 function handleCardClick(event) {
@@ -144,26 +212,72 @@ function handleCardClick(event) {
         if (event.target.closest('[tagId="productCardRemoveButton"]')) {
             handleChangeProductAmount(productCard, "-")
         }
+        if (event.target.closest('[tagId="removeFromBasketButton"]')) {
+            removeFromBasket(productCard);
+
+        }
     }
 }
 
-document.querySelector("#menuList")?.addEventListener("click", handleCardClick);
-document.querySelector(".related-products")?.addEventListener("click", handleCardClick);
-document.querySelector(".product-section")?.addEventListener("click", handleCardClick);
+document.querySelector('[tagId="cardsSection"]')?.addEventListener("click", handleCardClick);
 
 function initBasket() {
     let basket = getBasket();
     if (basket.length) {
         document.querySelector("#amountItemsInBucket").innerText = basket.length;
-        basket.forEach(function (value) {
-            let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
-            if (currentProductCard){
-                showCounter(currentProductCard);
-                currentProductCard.append(createCardLabel(value.count));
-                setCardPrice(currentProductCard, value.product.price * value.count);
-            }
-        })
+        if (location.pathname !== "/basket.html") {
+            basket.forEach(function (value) {
+                let currentProductCard = document.querySelector(`[dataId="${value.product.id}"]`);
+                if (currentProductCard) {
+                    showCounter(currentProductCard);
+                    currentProductCard.append(createCardLabel(value.count));
+                    setCardPrice(currentProductCard, value.product.price * value.count);
+                }
+            })
+        }
     }
 }
 
 initBasket();
+
+function calcSumPrice() {
+    return getBasket().reduce(function (acc, target) {
+        acc += target.product.price * target.count;
+        return acc;
+    }, 0)
+}
+
+function setSumPrice(){
+    document.querySelector(".ordering-block__sum-price").innerHTML = ` ${calcSumPrice()} ₽`
+}
+
+function calcFreeDeliverySum(){
+    let sumBasketPrice = calcSumPrice();
+    let freeDeliveryBlock = document.querySelector('[dataId="freeDelivery"]')
+    let deliveryPrice = document.querySelector(".ordering-block__check-for-discount")
+    if (sumBasketPrice >= FREE_DELIVERY){
+        freeDeliveryBlock.classList.add("ordering-block__free-delivery_hidden");
+    }else{
+        freeDeliveryBlock.classList?.remove("ordering-block__free-delivery_hidden")
+        let deliveryPriceSum = FREE_DELIVERY - sumBasketPrice;
+        deliveryPrice.innerHTML= ` ${deliveryPriceSum} ₽`
+    }
+}
+
+
+function calcNumberOfProducts() {
+    let sumNumberOfProducts = getBasket().reduce(function (acc, target) {
+        acc += target.count;
+        return acc;
+    }, 0)
+    document.querySelector(".basket-page-items-counter").innerHTML = `(в корзине ${sumNumberOfProducts} товара)`
+}
+
+window.basketAPI = {
+    changeBasketButtonCount,
+    getBasket,
+    setBasket,
+    setSumPrice,
+    calcNumberOfProducts,
+    calcFreeDeliverySum
+};
