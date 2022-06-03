@@ -1,0 +1,101 @@
+extends ../layouts/pageLayout
+
+block vars
+    - var showBackButton = true
+    - var title = "Оформление заказа"
+
+block head
+  link(rel="stylesheet" href="styles/orderingPage.css")
+  script(src="scripts/orderingPage.js" defer)
+
+block content
+  div.order-page
+    h3.order-page__title Оформление заказа
+    form.order-page__form
+      div.late-delivery.display_hide
+        span Сегодня мы уже не доставляем.
+        p Заказы принимаем до 20:50, доставляем с 8:30 до 21:30
+        img(src="assets/img/late-delivery.png")
+      div.form-group
+        h6.form-group__title 1. Контактная информация
+        div.contacts
+          input.contacts__full-name.form-group__input(type="text" name="name" placeholder="Имя")
+          input.contacts__phone-number.form-group__input(type="text" name="phone" placeholder="Телефон")
+      div.form-group
+        h6.form-group__title 2. Доставка
+        div.switch(dataId="delivery")
+          div.switch__block
+          label.switch__custom-button
+            input.switch__classic-button(type="radio" name="delivery" value="delivery" checked)
+            span.switch__text Доставка
+          label.switch__custom-button
+            input.switch__classic-button(type="radio" name="delivery" value="pickup")
+            span.switch__text Самовывоз
+        div.delivery
+          h7.delivery__inner-text.form-group__inner-text Адрес доставки
+          div.delivery__form-container
+            input.delivery__street.form-group__input(type="text" name="street" placeholder="Укажите улицу")
+            input.delivery__house-number.form-group__input(type="text" name="house" placeholder="Номер дома")
+            input.delivery__apartment-number.form-group__input(type="text" name="apartment" placeholder="№ квартиры/офиса")
+            input.delivery__entrance.form-group__input(type="text" name="entrance" placeholder="Подъезд")
+            input.delivery__floor.form-group__input(type="text" name="floor" placeholder="Этаж")
+            input.delivery__comments.form-group__input(type="text" name="comments" placeholder="Комментарий")
+        div.pickup.display_hide
+          h7.pickup__inner-text Выберите ресторан
+          div.drop-down
+            button.drop-down__button(type="button")
+              span.drop-down__button-title Выберите ресторан
+            div.drop-down__list(dataId="dropDownList")
+              div.drop-down__list-item(dataId="paveletskaya") Ресторан на Павелецкой
+              div.drop-down__list-item(dataId="baumanskaya") Ресторан на Бауманской
+              div.drop-down__list-item(dataId="dmitrovskaya") Ресторан на Дмитровской
+              div.drop-down__list-item(dataId="kievskaya") Ресторан на Киевской
+      div.form-group
+        h6.form-group__title 3. Оплатить
+        div.switch
+          div.switch__block
+          label.switch__custom-button
+            input.switch__classic-button(type="radio" name="payment" value="online" checked)
+            span.switch__text Оплата онлайн
+          label.switch__custom-button
+            input.switch__classic-button(type="radio" name="payment" value="expeditor")
+            span.switch__text Курьеру картой
+          label.switch__custom-button
+            input.switch__classic-button(type="radio" name="payment" value="cash")
+            span.switch__text Наличными
+      div.form-group
+        h6.form-group__title 4. Когда доставить
+        div.form-group__delivery-time
+          div.switch(dataId="deliveryTime")
+            div.switch__block
+            label.switch__custom-button
+              input.switch__classic-button(type="radio" name="deliveryTime" value="asap" checked)
+              span.switch__text В ближайшее время
+            label.switch__custom-button
+              input.switch__classic-button(type="radio" name="deliveryTime" value="inTime")
+              span.switch__text Ко времени
+          input.date-time.form-group__input.display_hide(type="time" name="time")
+        div.person-counter
+          div.person-counter__text-block Кол-во персон
+          div.person-counter__control-block
+            button.person-counter__button.person-counter__remove-button(type="button")
+            div.person-counter__number 1
+            button.person-counter__button.person-counter__add-button(type="button")
+        h7.form-group__inner-text Хотите мы позвоним?
+        div.radio
+          label.radio__button-classic
+            input.radio__button(type="radio" name="callBack" value="yes" checked)
+            div.radio__button-restyled
+            span.radio__text Не перезванивать
+          label.radio__button-classic
+            input.radio__button(type="radio" name="callBack" value="no")
+            div.radio__button-restyled
+            span.radio__text Потребуется звонок оператора
+      div.checkout
+        div.checkout__checkbox
+          label.check
+            input.check__box(type="checkbox" name="consentToProcessingOfPD")
+            div.check__custom-box
+            span.check__text Я согласен на обработку моих перс. данных в соответствии с
+          a.check__link Условиями
+        button.button.checkout__button(disabled) Оформить заказ
