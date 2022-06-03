@@ -14,6 +14,8 @@ const CALLBACK = {
     no: "нет"
 }
 
+document.querySelector("#amountItemsInBucket").innerText = JSON.parse(localStorage.getItem("basket")).length;
+
 let radios = document.querySelectorAll(".switch");
 radios.forEach(function (item) {
     let switchBlock = item.querySelector(".switch__block");
@@ -208,7 +210,7 @@ function mappingOrder(order) {
                 ${order.address.comments}
                 </td>
             </tr>`}
-            ${order.chosenRestaurant && `
+            ${order.chosenRestaurant ? `
             <tr>
                 <td>
                 Выбранный ресторан: 
@@ -216,8 +218,8 @@ function mappingOrder(order) {
                 <td>
                 ${order.chosenRestaurant}
                 </td>
-            </tr>`}
-            ${order.time && `
+            </tr>` : ""}
+            ${order.time ? `
             <tr>
                 <td>
                 Ко времени: 
@@ -225,7 +227,7 @@ function mappingOrder(order) {
                 <td>
                 ${order.time}
                 </td>
-            </tr>`}
+            </tr>` : ""}
         </table>
     </div>
     `
@@ -264,10 +266,11 @@ orderPageForm.addEventListener("submit", function (e) {
     }
     let modal = document.querySelector(".modal");
     modal.querySelector(".modal__caption").innerHTML = "Заказ оформлен";
-    console.log(mappingOrder(order))
     modal.querySelector(".modal__description").innerHTML = mappingOrder(order);
     document.querySelector("body").style.overflow = "hidden";
     modal.classList.remove("modal_hide");
+    localStorage.setItem("basket", JSON.stringify([]));
+    localStorage.setItem("addToOrder", JSON.stringify([]));
 })
 
 document.querySelector(".check__box").addEventListener("change", function (e) {
