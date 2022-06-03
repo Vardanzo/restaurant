@@ -18,3 +18,28 @@
     margin-left: -18px;
   }
 }
+
+@mixin person-counter-button($isAfter: false) {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 14px;
+  background-color: $color-white;
+  @if $isAfter {
+    transform: rotate(90deg);
+    margin-left: -18px;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
