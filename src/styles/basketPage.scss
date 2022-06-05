@@ -132,6 +132,9 @@
   text-transform: uppercase;
   margin-bottom: 4px;
   margin-top: 9px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .added-product__description {
@@ -146,6 +149,9 @@
   width: 117px;
   height: 86px;
   margin-right: 39px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .product-counter-block {
@@ -191,6 +197,9 @@
   height: 123px;
   border-radius: 10px;
   margin-bottom: 10px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .add-to-order__title {
@@ -201,6 +210,9 @@
   color: $color-white;
   text-align: center;
   margin-bottom: 11px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .add-to-order__text-block {
@@ -313,5 +325,9 @@
 }
 
 .ordering-block__order-page-link{
+  text-decoration: none;
+}
+
+.product-card__link{
   text-decoration: none;
 }

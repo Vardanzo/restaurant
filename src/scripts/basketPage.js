@@ -2,11 +2,15 @@ function mapBasket() {
     let basket = JSON.parse(localStorage.getItem("basket"));
     let currentProducts = basket.map(function (value) {
         return `
-    <div class="added-product" dataId="${value.product.id}" tagId="productCard">
-        <img class="added-product__img" src="${value.product.img}" alt="${value.product.name}" tagId="productCardImg">
+    <div class="added-product" dataId="${value.product.id}" tagId="productCard" dataWeight="${value.product.weight}">
+        <a class="product-card__link" href="/product.html" tagId="productCardLink">
+            <img class="added-product__img" src="${value.product.img}" alt="${value.product.name}" tagId="productCardImg">
+        </a>    
         <div class="added-product__text-wrapper">
-            <div class="added-product__title" tagId="productCardTitle">${value.product.name}</div>
-            <div class="added-product__description" tagId="productCardDescription">${value.product.description}</div>
+            <a class="product-card__link" href="/product.html" tagId="productCardLink">
+                <div class="added-product__title" tagId="productCardTitle">${value.product.name}</div>
+            </a>    
+            <div class="added-product__description" tagId="productCardDescription" dataDe>${value.product.description}</div>
         </div>
         <div class="product-counter-block"> 
             <div>

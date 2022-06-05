@@ -4,8 +4,8 @@ block head
   link(rel="stylesheet" href="styles/productPage.css")
   link(rel="stylesheet" href="styles/products.css")
   link(rel="stylesheet" href="styles/contactsSection.css")
-  script(src="scripts/product.js" defer)
   script(src="scripts/basket.js" defer)
+  script(src="scripts/product.js" defer)
 
 block vars
     - var title = "Страница товара"
@@ -38,7 +38,7 @@ block content
             div 7.63
             div 22.35
             div 234
-  div.related-products(tagId="cardsSection")
-    include ../blocks/relatedProdactsBlock
+    div.related-products
+      include ../blocks/relatedProdactsBlock
   include ../blocks/contactsSection
 

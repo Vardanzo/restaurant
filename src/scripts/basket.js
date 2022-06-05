@@ -53,15 +53,34 @@ function setCardLabelValue(card, value) {
     card.querySelector('[tagId="counterLabel"]').innerText = value;
 }
 
+function getProductWeight(productCard){
+    if (productCard.querySelector('[tagId="productCardDescription"]')){
+        return productCard.querySelector('[tagId="productCardDescription"]').innerText;
+    }else {
+        return productCard.getAttribute("dataDescription");
+    }
+}
+
 function createProductObject(productCard) {
-    return {
-        name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
-        description: productCard.querySelector('[tagId="productCardDescription"]').innerText,
-        img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
-        weight: parseInt(productCard.querySelector('[tagId="productCardWeight"]').innerText.slice(5)),
-        price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
-        id: productCard.getAttribute("dataId")
-    };
+    if (location.pathname === "/basket.html"){
+        return{
+            name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
+            description: getProductWeight(productCard),
+            img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
+            weight: parseInt(productCard.getAttribute("dataWeight")),
+            price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
+            id: productCard.getAttribute("dataId")
+        }
+    }else {
+        return {
+            name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
+            description: productCard.querySelector('[tagId="productCardDescription"]').innerText,
+            img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
+            weight: parseInt(productCard.querySelector('[tagId="productCardWeight"]').innerText.slice(5)),
+            price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
+            id: productCard.getAttribute("dataId")
+        };
+    }
 }
 
 function canDo(event) {
@@ -194,6 +213,7 @@ function removeFromBasket(productCard) {
 
 function handleCardClick(event) {
     event.preventDefault();
+    event.preventDefault();
     if (canDo(event)) {
         let productCard = event.target.closest('[tagId="productCard"]');
 
@@ -270,7 +290,7 @@ function calcNumberOfProducts() {
         acc += target.count;
         return acc;
     }, 0)
-    document.querySelector(".basket-page-items-counter").innerHTML = `(в корзине ${sumNumberOfProducts} товара)`
+    document.querySelector(".basket-page-items-counter").innerHTML= `(в корзине ${sumNumberOfProducts} товара)`
 }
 
 window.basketAPI = {

@@ -193,7 +193,7 @@ function mappingOrder(order) {
                 ${CALLBACK[order.callBack]}
                 </td>
             </tr>
-            ${order.address && `
+            ${order.address ? `
             <tr>
                 <td>
                 Адрес доставки: 
@@ -209,7 +209,7 @@ function mappingOrder(order) {
                 <td>
                 ${order.address.comments}
                 </td>
-            </tr>`}
+            </tr>` : ""}
             ${order.chosenRestaurant ? `
             <tr>
                 <td>
