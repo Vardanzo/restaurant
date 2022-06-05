@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/orderingPage.css">
+    <script src="scripts/orderingPage.js" defer></script>
+    <script src="scripts/common.js" defer></script>
+    <title>Оформление заказа</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <div class="header__top-section"><a class="logo header__logo" href="/">LOGOS</a>
+          <form>
+            <div class="search header__search">
+              <div class="headers-icon search__location-icon"></div>
+              <input class="search__input" type="text" name="search" placeholder="Введите адрес доставки">
+              <div class="headers-icon search__scope-icon"></div>
+            </div>
+          </form>
+          <div class="contacts-small">
+            <div class="contacts-small__phone-icon-bg">
+              <div class="contacts-small__phone-icon"></div>
+            </div>
+            <div class="contacts-small__info">
+              <div class="contacts-small__title">Контакты:</div>
+              <div class="contacts-small__phone-number">+7 (917) 510-57-59</div>
+            </div>
+          </div><a class="header__link" href="/basket.html">
+            <button class="button header__basket"><span>Корзина</span>
+              <div class="item-counter">
+                <div class="item-counter__amount" id="amountItemsInBucket">0</div>
+              </div>
+            </button></a>
+        </div>
+        <nav class="header__bottom-section">
+          <ul class="restaurant-menu">
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="coldSnacks">Холодные закуски</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="hotSnacks">Горячие закуски</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="meatFood">Мясные блюда</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="soups">Супы</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="fishFood">Рыбные блюда</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="grillMenu">Гриль меню</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="brandedFood">Фирменые блюда</a></li>
+            <li class="restaurant-menu__item"><a class="restaurant-menu__link" to="drinks">Напитки</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <button class="back-button">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="13" r="13" fill="url(#paint0_linear_63_954)"></circle>
+            <path d="M9.46967 12.4697C9.17678 12.7626 9.17678 13.2374 9.46967 13.5303L14.2426 18.3033C14.5355 18.5962 15.0104 18.5962 15.3033 18.3033C15.5962 18.0104 15.5962 17.5355 15.3033 17.2426L11.0607 13L15.3033 8.75736C15.5962 8.46447 15.5962 7.98959 15.3033 7.6967C15.0104 7.40381 14.5355 7.40381 14.2426 7.6967L9.46967 12.4697ZM11 12.25L10 12.25L10 13.75L11 13.75L11 12.25Z" fill="white"></path>
+            <defs>
+              <linearGradient id="paint0_linear_63_954" x1="1.25806" y1="1.47727" x2="29.0993" y2="14.4163" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#618967"></stop>
+                <stop offset="1" stop-color="#72A479"></stop>
+              </linearGradient>
+            </defs>
+          </svg><span>Вернуться назад</span>
+        </button>
+        <div class="order-page">
+          <h3 class="order-page__title">Оформление заказа</h3>
+          <form class="order-page__form">
+            <div class="late-delivery display_hide"><span>Сегодня мы уже не доставляем.</span>
+              <p>Заказы принимаем до 20:50, доставляем с 8:30 до 21:30</p><img src="assets/img/late-delivery.png">
+            </div>
+            <div class="form-group">
+              <h6 class="form-group__title">1. Контактная информация</h6>
+              <div class="contacts">
+                <input class="contacts__full-name form-group__input" type="text" name="name" placeholder="Имя">
+                <input class="contacts__phone-number form-group__input" type="text" name="phone" placeholder="Телефон">
+              </div>
+            </div>
+            <div class="form-group">
+              <h6 class="form-group__title">2. Доставка</h6>
+              <div class="switch" dataId="delivery">
+                <div class="switch__block"></div>
+                <label class="switch__custom-button">
+                  <input class="switch__classic-button" type="radio" name="delivery" value="delivery" checked><span class="switch__text">Доставка</span>
+                </label>
+                <label class="switch__custom-button">
+                  <input class="switch__classic-button" type="radio" name="delivery" value="pickup"><span class="switch__text">Самовывоз</span>
+                </label>
+              </div>
+              <div class="delivery">
+                <h7 class="delivery__inner-text form-group__inner-text">Адрес доставки</h7>
+                <div class="delivery__form-container">
+                  <input class="delivery__street form-group__input" type="text" name="street" placeholder="Укажите улицу">
+                  <input class="delivery__house-number form-group__input" type="text" name="house" placeholder="Номер дома">
+                  <input class="delivery__apartment-number form-group__input" type="text" name="apartment" placeholder="№ квартиры/офиса">
+                  <input class="delivery__entrance form-group__input" type="text" name="entrance" placeholder="Подъезд">
+                  <input class="delivery__floor form-group__input" type="text" name="floor" placeholder="Этаж">
+                  <input class="delivery__comments form-group__input" type="text" name="comments" placeholder="Комментарий">
+                </div>
+              </div>
+              <div class="pickup display_hide">
+                <h7 class="pickup__inner-text">Выберите ресторан</h7>
+                <div class="drop-down">
+                  <button class="drop-down__button" type="button"><span class="drop-down__button-title">Выберите ресторан</span></button>
+                  <div class="drop-down__list" dataId="dropDownList">
+                    <div class="drop-down__list-item" dataId="paveletskaya">Ресторан на Павелецкой</div>
+                    <div class="drop-down__list-item" dataId="baumanskaya">Ресторан на Бауманской</div>
+                    <div class="drop-down__list-item" dataId="dmitrovskaya">Ресторан на Дмитровской</div>
+                    <div class="drop-down__list-item" dataId="kievskaya">Ресторан на Киевской</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6 class="form-group__title">3. Оплатить</h6>
+              <div class="switch">
+                <div class="switch__block"></div>
+                <label class="switch__custom-button">
+                  <input class="switch__classic-button" type="radio" name="payment" value="online" checked><span class="switch__text">Оплата онлайн</span>
+                </label>
+                <label class="switch__custom-button">
+                  <input class="switch__classic-button" type="radio" name="payment" value="expeditor"><span class="switch__text">Курьеру картой</span>
+                </label>
+                <label class="switch__custom-button">
+                  <input class="switch__classic-button" type="radio" name="payment" value="cash"><span class="switch__text">Наличными</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6 class="form-group__title">4. Когда доставить</h6>
+              <div class="form-group__delivery-time">
+                <div class="switch" dataId="deliveryTime">
+                  <div class="switch__block"></div>
+                  <label class="switch__custom-button">
+                    <input class="switch__classic-button" type="radio" name="deliveryTime" value="asap" checked><span class="switch__text">В ближайшее время</span>
+                  </label>
+                  <label class="switch__custom-button">
+                    <input class="switch__classic-button" type="radio" name="deliveryTime" value="inTime"><span class="switch__text">Ко времени</span>
+                  </label>
+                </div>
+                <input class="date-time form-group__input display_hide" type="time" name="time">
+              </div>
+              <div class="person-counter">
+                <div class="person-counter__text-block">Кол-во персон</div>
+                <div class="person-counter__control-block">
+                  <button class="person-counter__button person-counter__remove-button" type="button"></button>
+                  <div class="person-counter__number">1</div>
+                  <button class="person-counter__button person-counter__add-button" type="button"></button>
+                </div>
+              </div>
+              <h7 class="form-group__inner-text">Хотите мы позвоним?</h7>
+              <div class="radio">
+                <label class="radio__button-classic">
+                  <input class="radio__button" type="radio" name="callBack" value="yes" checked>
+                  <div class="radio__button-restyled"></div><span class="radio__text">Не перезванивать</span>
+                </label>
+                <label class="radio__button-classic">
+                  <input class="radio__button" type="radio" name="callBack" value="no">
+                  <div class="radio__button-restyled"></div><span class="radio__text">Потребуется звонок оператора</span>
+                </label>
+              </div>
+            </div>
+            <div class="checkout">
+              <div class="checkout__checkbox">
+                <label class="check">
+                  <input class="check__box" type="checkbox" name="consentToProcessingOfPD">
+                  <div class="check__custom-box"></div><span class="check__text">Я согласен на обработку моих перс. данных в соответствии с</span>
+                </label><a class="check__link">Условиями</a>
+              </div>
+              <button class="button checkout__button" disabled>Оформить заказ</button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer__left-section"><a class="logo footer__logo" href="/">LOGOS</a>
+          <div class="company-teg"><span>© ООО СК «АПШЕРОН»</span><br><span>Все права защищены. 2010-2020</span></div>
+          <ul class="documentation-block">
+            <li class="documentation-block__item"><a class="documentation-block__link" href="#">Пользовательское соглашение</a></li>
+            <li class="documentation-block__item"><a class="documentation-block__link" href="#">Карта сайта</a></li>
+            <li class="documentation-block__item"><a class="documentation-block__link" href="#">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+        <div class="footer__right-section">
+          <ul class="detailed-information-block">
+            <li class="detailed-information-block__item"><a class="detailed-information-block__link" href="/about">О ресторане</a></li>
+            <li class="detailed-information-block__item"><a class="detailed-information-block__link" href="/delivery.html">Условия доставки</a></li>
+            <li class="detailed-information-block__item"><a class="detailed-information-block__link" href="/purchaseReturn">Возврат товара</a></li>
+            <li class="detailed-information-block__item"><a class="detailed-information-block__link" href="/promotions.html">Акции</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+    <div class="modal modal_hide">
+      <div class="modal__back"></div>
+      <div class="modal__content">
+        <svg class="modal__exit-button" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_72_2828)">
+            <path d="M20.0111 16.8379L16.5016 13.3284L20.0111 9.81893C20.8733 8.9567 20.8549 7.52675 19.9923 6.66422C19.1298 5.80168 17.6999 5.78327 16.8376 6.64549L13.3281 10.155L9.81862 6.64549C8.9564 5.78327 7.52645 5.80168 6.66391 6.66422C5.80137 7.52675 5.78296 8.9567 6.64519 9.81893L10.1547 13.3284L6.64519 16.8379C5.78296 17.7002 5.80137 19.1301 6.66391 19.9926C7.52645 20.8552 8.9564 20.8736 9.81862 20.0114L13.3281 16.5019L16.8376 20.0114C17.6998 20.8736 19.1298 20.8552 19.9923 19.9926C20.8549 19.1301 20.8733 17.7002 20.0111 16.8379Z" fill="white"></path>
+          </g>
+          <defs>
+            <clipPath id="clip0_72_2828">
+              <rect width="18.8492" height="18.8492" fill="white" transform="translate(13.3281) rotate(45)"></rect>
+            </clipPath>
+          </defs>
+        </svg>
+        <div class="modal__caption"></div>
+        <div class="modal__description"></div>
+        <button class="button modal__back-to-menu">Посмотреть меню</button>
+      </div>
+    </div>
+  </body>
+</html>
