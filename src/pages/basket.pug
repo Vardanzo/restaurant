@@ -14,18 +14,21 @@ block content
   div.basket-page__wrapper
     h3.basket-page__title Корзина
       div.basket-page-items-counter
-    div.basket-page__products-section(tagId="cardsSection")
-    div.add-to-order
-      h3.add-to-order__block-title Добавить к заказу
-      div.add-to-order__items-block
-        each addToOrderItem in addToOrderItems
-          div.add-to-order__item(dataId=addToOrderItem.id dataDescription=addToOrderItem.description dataWeight=addToOrderItem.weight)
-            img.add-to-order__img(src=addToOrderItem.img)
-            div.add-to-order__title #{addToOrderItem.name}
-            div.add-to-order__text-block
-              span.add-to-order__text Добавить
-              button.button.add-to-order__add-button.add-to-order__add-button-counter
-            div.add-to-order__price #{addToOrderItem.price} ₽
+    div(tagId="cardsSection")
+      div.basket-page__products-section
+      div.add-to-order
+        h3.add-to-order__block-title Добавить к заказу
+        div.add-to-order__items-block
+          each addToOrderItem in addToOrderItems
+            div.add-to-order__item(tagId="productCard" dataId=addToOrderItem.id dataDescription=addToOrderItem.description dataWeight=addToOrderItem.weight)
+              a.product-card__link(href="/product.html" tagId="productCardLink")
+                img.add-to-order__img(tagId="productCardImg" src=addToOrderItem.img)
+              a.product-card__link(href="/product.html" tagId="productCardLink")
+                div.add-to-order__title(tagId="productCardTitle") #{addToOrderItem.name}
+              div.add-to-order__text-block
+                span.add-to-order__text Добавить
+                button.button.add-to-order__add-button.add-to-order__add-button-counter
+              div.add-to-order__price(tagId="productCardPrice") #{addToOrderItem.price} ₽
     div.ordering-block
       div.ordering-block__info
         div.ordering-block__sum

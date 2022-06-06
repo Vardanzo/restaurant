@@ -53,15 +53,34 @@ function setCardLabelValue(card, value) {
     card.querySelector('[tagId="counterLabel"]').innerText = value;
 }
 
+function getProductWeight(productCard) {
+    if (productCard.querySelector('[tagId="productCardDescription"]')) {
+        return productCard.querySelector('[tagId="productCardDescription"]').innerText;
+    } else {
+        return productCard.getAttribute("dataDescription");
+    }
+}
+
 function createProductObject(productCard) {
-    return {
-        name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
-        description: productCard.querySelector('[tagId="productCardDescription"]').innerText,
-        img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
-        weight: parseInt(productCard.querySelector('[tagId="productCardWeight"]').innerText.slice(5)),
-        price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
-        id: productCard.getAttribute("dataId")
-    };
+    if (location.pathname === "/basket.html") {
+        return {
+            name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
+            description: getProductWeight(productCard),
+            img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
+            weight: parseInt(productCard.getAttribute("dataWeight")),
+            price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
+            id: productCard.getAttribute("dataId")
+        }
+    } else {
+        return {
+            name: productCard.querySelector('[tagId="productCardTitle"]').innerText,
+            description: productCard.querySelector('[tagId="productCardDescription"]').innerText,
+            img: productCard.querySelector('[tagId="productCardImg"]').getAttribute("src"),
+            weight: parseInt(productCard.querySelector('[tagId="productCardWeight"]').innerText.slice(5)),
+            price: parseInt(productCard.querySelector('[tagId="productCardPrice"]').innerText),
+            id: productCard.getAttribute("dataId")
+        };
+    }
 }
 
 function canDo(event) {
@@ -144,8 +163,8 @@ function handleChangeProductAmount(productCard, direction) {
     setBasket(basket);
     if (location.pathname === "/basket.html")
         setSumPrice();
-        calcNumberOfProducts();
-        calcFreeDeliverySum();
+    calcNumberOfProducts();
+    calcFreeDeliverySum();
 }
 
 function removeFromBasket(productCard) {
@@ -247,30 +266,34 @@ function calcSumPrice() {
     }, 0)
 }
 
-function setSumPrice(){
+function setSumPrice() {
     document.querySelector(".ordering-block__sum-price").innerHTML = ` ${calcSumPrice()} ₽`
 }
 
-function calcFreeDeliverySum(){
-    let sumBasketPrice = calcSumPrice();
-    let freeDeliveryBlock = document.querySelector('[dataId="freeDelivery"]')
-    let deliveryPrice = document.querySelector(".ordering-block__check-for-discount")
-    if (sumBasketPrice >= FREE_DELIVERY){
-        freeDeliveryBlock.classList.add("ordering-block__free-delivery_hidden");
-    }else{
-        freeDeliveryBlock.classList?.remove("ordering-block__free-delivery_hidden")
-        let deliveryPriceSum = FREE_DELIVERY - sumBasketPrice;
-        deliveryPrice.innerHTML= ` ${deliveryPriceSum} ₽`
+function calcFreeDeliverySum() {
+    if (location.pathname === "/basket.html"){
+        let sumBasketPrice = calcSumPrice();
+        let freeDeliveryBlock = document.querySelector('[dataId="freeDelivery"]')
+        let deliveryPrice = document.querySelector(".ordering-block__check-for-discount")
+        if (sumBasketPrice >= FREE_DELIVERY) {
+            freeDeliveryBlock.classList.add("ordering-block__free-delivery_hidden");
+        } else {
+            freeDeliveryBlock.classList?.remove("ordering-block__free-delivery_hidden")
+            let deliveryPriceSum = FREE_DELIVERY - sumBasketPrice;
+            deliveryPrice.innerHTML = ` ${deliveryPriceSum} ₽`
+        }
     }
 }
 
 
 function calcNumberOfProducts() {
-    let sumNumberOfProducts = getBasket().reduce(function (acc, target) {
-        acc += target.count;
-        return acc;
-    }, 0)
-    document.querySelector(".basket-page-items-counter").innerHTML = `(в корзине ${sumNumberOfProducts} товара)`
+    if (location.pathname === "/basket.html") {
+        let sumNumberOfProducts = getBasket().reduce(function (acc, target) {
+            acc += target.count;
+            return acc;
+        }, 0)
+        document.querySelector(".basket-page-items-counter").innerHTML = `(в корзине ${sumNumberOfProducts} товара)`
+    }
 }
 
 window.basketAPI = {
@@ -278,6 +301,9 @@ window.basketAPI = {
     getBasket,
     setBasket,
     setSumPrice,
+    showCounter,
+    createCardLabel,
+    setCardPrice,
     calcNumberOfProducts,
     calcFreeDeliverySum
 };
